@@ -1,0 +1,153 @@
+/* Styling */
+/* color: #59EA59; */
+/* font-family: 'Rationale', sans-serif; */
+
+body {
+  min-height: 100vh;
+  font-family: 'Rationale', sans-serif;
+  color: #000;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* NAVBAR/BURGER MENU */
+nav {
+  position: relative;
+  background: #000;
+  min-height: 41px;
+}
+
+a {
+  padding: .5rem;
+  text-decoration: none;
+  color: #59EA59;
+}
+
+nav ul {
+  padding: .2em 0;
+  align-items: center;
+  flex-direction: column;
+  line-height: 1.5;
+  font-size: 0;
+  transform: scale(0,0);
+  transition: 1s;
+}
+
+nav a {
+  padding: .25em;
+}
+
+ul.container.burger-open {
+  font-size: 1.5em;
+  transform: scale(1,1);
+}
+
+/* BURGER ICON */
+.burger-icon {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 1px;
+  left: 1px;
+  padding: 5px 5px;
+  width: 40px;
+  cursor: pointer;
+}
+
+.burger-icon div {
+  margin: 5px 5px;
+  width: 30px;
+  height: 3px;
+  background-color: #59EA59;
+  transition: 0.5s;
+}
+
+.transform #bar1 {
+  transform: rotate(-45deg) translate(-4px, 5px);
+}
+
+.transform #bar2 {
+  opacity: 0;
+}
+
+.transform #bar3 {
+  transform: rotate(45deg) translate(-6px, -8px) ;
+}
+
+/* CANVAS IMAGES */
+.canvas-images {
+  display: none;
+}
+
+/* CANVAS */
+canvas {
+  margin: .5rem auto 0;
+  box-sizing: border-box;
+  width: 95%;
+  max-width: 500px;
+  height: calc(95vw * 0.75);
+  max-height: 375px;
+  display: block;
+  border: 1px solid black;
+}
+
+/* QUESTION */
+#question {
+  box-sizing: border-box;
+  margin: 1rem auto .75rem;
+  padding: .5rem;
+  width: 95%;
+  max-width: 600px;
+  border: 1px solid black;
+  font-family: 'Rationale', sans-serif;
+  font-size: 1rem;
+}
+
+/* ANSWERS */
+.answer {
+  box-sizing: border-box;
+  margin: auto;
+  padding: .5rem;
+  width: 95%;
+  max-width: 600px;
+  border: 1px solid black;
+  text-align: left;
+  font-size: 1rem;
+}
+
+/* FOOTER */
+footer {
+  margin-top: auto;
+  min-height: 2.25rem;
+  font-size: 1em;
+  color: #59EA59;
+  background: #000;
+}
+
+#copyright {
+  margin: auto 1rem;
+}
+
+/* MEDIA QUERIES */
+@media only screen and (min-width: 800px) {
+  .burger-icon {
+    display: none;
+  }
+
+  nav ul {
+    padding: .5rem;
+    font-size: 1.5em;
+    list-style-type: none;
+    background: #000;
+    color: #59EA59;
+    flex-direction: row;
+    justify-content: space-around;
+    transform: scale(1,1);
+  }
+}
