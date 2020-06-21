@@ -20,6 +20,7 @@ const treeimage = document.querySelector("#treeimage");
 const houseimage = document.querySelector("#houseimage");
 const cityimage = document.querySelector("#cityimage");
 const trophyimage = document.querySelector("#trophyimage");
+const bridgeimage = document.querySelector("#bridgeimage");
 
 var boxSize = canvas.width/20;
 
@@ -43,10 +44,15 @@ var maze = [
 
 for (var y = 0; y < maze.length; y++) {
   for (var x = 0; x < maze[y].length; x++) {
+    if (maze[y][x] === 0 || maze[y][x] === 1) {
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = 1;
+      ctx.strokeRect(x * boxSize, y * boxSize, boxSize, boxSize);
+    }
     if (maze[y][x] === 1) {
       ctx.drawImage(starimage, x * boxSize, y * boxSize, boxSize, boxSize);
     } else if (maze[y][x] === 2) {
-      ctx.fillStyle = "blue";
+      ctx.fillStyle = "#3374FF";
       ctx.fillRect (x * boxSize, y * boxSize, boxSize, boxSize);
     } else if (maze[y][x] === 3) {
       ctx.drawImage(treeimage, x * boxSize, y * boxSize, boxSize, boxSize);
@@ -57,8 +63,9 @@ for (var y = 0; y < maze.length; y++) {
     } else if (maze[y][x] === 6) {
       ctx.drawImage(trophyimage, x * boxSize, y * boxSize, boxSize, boxSize);
     } else if (maze[y][x] === 7) {
-      ctx.fillStyle = "brown";
+      ctx.fillStyle = "#3374FF";
       ctx.fillRect (x * boxSize, y * boxSize, boxSize, boxSize);
+      ctx.drawImage(bridgeimage, x * boxSize, y * boxSize, boxSize, boxSize);
     }
   }
 }
