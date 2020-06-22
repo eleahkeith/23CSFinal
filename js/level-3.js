@@ -32,9 +32,9 @@ const trophyimage = document.querySelector("#trophyimage");
 const bridgeimage = document.querySelector("#bridgeimage");
 const characterimage = document.querySelector("#characterimage");
 
-var boxSize = canvas.width/20;
+const boxSize = canvas.width/20;
 
-var maze = [
+const maze = [
   [4,3,4,4,4,4,4,4,4,4,4,0,0,5,5,5,2,5,5,5],
   [4,0,4,0,0,0,0,0,0,4,0,4,0,0,0,5,2,5,0,5],
   [4,0,4,0,4,3,4,0,4,4,0,1,0,5,0,5,2,5,0,5],
