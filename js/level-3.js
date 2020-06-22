@@ -185,76 +185,76 @@ const answerBoxes = [document.querySelector("#answer1"), document.querySelector(
   document.querySelector("#answer3"), document.querySelector("#answer4")];
 
 const quiz = {
-  q1: ["Level 3.1: <br> function walk(steps, direction) {...};",
-      {a1: ["function walk(3, 'up'); function walk(2, 'right');", false],
+  q1: {q: "Level 3.1: <br> function walk(steps, direction) {...};",
+        a1: ["function walk(3, 'up'); function walk(2, 'right');", false],
         a2: ["walk() {3, 'up'}; walk() {2, 'right};", false],
         a3: ["walk(3, 'up'); walk(2, 'right');", true],
-        a4: ["walk('up', 3); function walk('right', 2);", false]}],
-  q2: ["Level 3.2: <br> function runUp(steps) {...}; function runDown(steps) {...}; function runRight(steps) {...}; function runLeft(steps) {...};",
-      {a1: ["runUp(2); runLeft(2); runUp(6);", true, "b"],
+        a4: ["walk('up', 3); function walk('right', 2);", false]},
+  q2: {q: "Level 3.2: <br> function runUp(steps) {...}; function runDown(steps) {...}; function runRight(steps) {...}; function runLeft(steps) {...};",
+        a1: ["runUp(2); runLeft(2); runUp(6);", true, "b"],
         a2: ["runDown{3}; runRight{2};", false],
         a3: ["runUp(2), runleft(2), runUp(6);", false],
-        a4: ["runDown(3); runRight(2);", true, "a"]}],
-  q3a: ["Level 3.3a: <br> var i = 0; while (i < number) {runUpOneStep(); i++}; runRight(2);",
-      {a1: ["number = 9", false],
+        a4: ["runDown(3); runRight(2);", true, "a"]},
+  q3a: {q: "Level 3.3a: <br> var i = 0; while (i < number) {runUpOneStep(); i++}; runRight(2);",
+        a1: ["number = 9", false],
         a2: ["number = 10", false],
         a3: ["number = 11", true],
-        a4: ["number = 12", false]}],
-  q3b: ["Level 3.3b: <br> function path() {walk(2,'right');",
-      {a1: ["walk(2,'up'); walk(4,'left'); walk(2,'down')};", false],
+        a4: ["number = 12", false]},
+  q3b: {q: "Level 3.3b: <br> function path() {walk(2,'right');",
+        a1: ["walk(2,'up'); walk(4,'left'); walk(2,'down')};", false],
         a2: ["walk(2,'up'); walk(4,'left'); walk(2,'up')}; path();", false],
         a3: ["walk(2,'up'); walk(4,'right); walk(2,down'); path();", false],
-        a4: ["walk(2,'up'); walk(4,'right'); walk(2,'down')}; path();", true]}],
-  q4: ["Level 3.4: <br> var x = 2; var y = 3; var z = 4;",
-      {a1: ["runRight(x); runDown(y); runLeft(y - x); runDown(x);", true],
+        a4: ["walk(2,'up'); walk(4,'right'); walk(2,'down')}; path();", true]},
+  q4: {q: "Level 3.4: <br> var x = 2; var y = 3; var z = 4;",
+        a1: ["runRight(x); runDown(y); runLeft(y - x); runDown(x);", true],
         a2: ["runRight(var x); runDown(var y); runLeft(var y - var x);", false],
         a3: ["runRight(x); runDown(z); runLeft(x - y); runDown(y);", false],
-        a4: ["runRight(x); runDown(y); runLeft(z - x); runDown(x);", false]}],
-  q5: ["Level 3.5: <br> walk(2, 'right'); <br> var options = {number: [1, 2, 3], direction: ['up', 'down', 'right']};",
-      {a1: ["walk(options.number[1], options.direction[1]); walk(1, 'right');", false],
+        a4: ["runRight(x); runDown(y); runLeft(z - x); runDown(x);", false]},
+  q5: {q: "Level 3.5: <br> walk(2, 'right'); <br> var options = {number: [1, 2, 3], direction: ['up', 'down', 'right']};",
+        a1: ["walk(options.number[1], options.direction[1]); walk(1, 'right');", false],
         a2: ["walk(options.number[0], options.direction[0]); walk(1, 'right');", true, "b"],
         a3: ["walk(options.number[3], options.direction[2]); walk(1, 'left');", false],
-        a4: ["walk(options.number[2], options.direction[1]); walk(1, 'left');", true, "a"]}],
-  q6a: ["Level 3.6a: <br> var steps = [1, 3]; steps.push(2);",
-      {a1: ["runDown(steps(2)); runRight(steps(1)); runUp(steps(2));", false],
+        a4: ["walk(options.number[2], options.direction[1]); walk(1, 'left');", true, "a"]},
+  q6a: {q: "Level 3.6a: <br> var steps = [1, 3]; steps.push(2);",
+        a1: ["runDown(steps(2)); runRight(steps(1)); runUp(steps(2));", false],
         a2: ["runDown(steps[3]); runLeft(steps[1]); runUp(steps[2]);", false],
         a3: ["runDown(steps[3]); runRight(steps[2]); runUp(steps[3]);", false],
-        a4: ["runDown(steps[2]); runRight(steps[1]); runUp(steps[2]);", true]}],
-  q6b: ["Level 3.6b: <br> for (var i = 10; i > number; i--) {runUpOneStep();};",
-      {a1: ["number = 3", false],
+        a4: ["runDown(steps[2]); runRight(steps[1]); runUp(steps[2]);", true]},
+  q6b: {q: "Level 3.6b: <br> for (var i = 10; i > number; i--) {runUpOneStep();};",
+        a1: ["number = 3", false],
         a2: ["number = 4", true],
         a3: ["number = 5", false],
-        a4: ["number = 6", false]}],
-  q7a: ["Level 3.7a: <br> runRight(2); for (var i=10; i > number; i--) {runUpOneStep();}; runRight(1);",
-      {a1: ["number = 3", false],
+        a4: ["number = 6", false]},
+  q7a: {q: "Level 3.7a: <br> runRight(2); for (var i=10; i > number; i--) {runUpOneStep();}; runRight(1);",
+        a1: ["number = 3", false],
         a2: ["number = 4", false],
         a3: ["number = 5", true],
-        a4: ["number = 6", false]}],
-  q7b: ["Level 3.7b: <br> runRight(1); runUp(1); var steps = [1, 3, 4, 2]; steps.splice(2, 1);",
-      {a1: ["runRight(steps[2]); runDown(steps[2]); runRight(steps[0]);", true],
+        a4: ["number = 6", false]},
+  q7b: {q: "Level 3.7b: <br> runRight(1); runUp(1); var steps = [1, 3, 4, 2]; steps.splice(2, 1);",
+        a1: ["runRight(steps[2]); runDown(steps[2]); runRight(steps[0]);", true],
         a2: ["runRight(steps[3]); runDown(steps[3]); runRight(steps[0]);", false],
         a3: ["runRight(steps(2)); runDown(steps(2)); runRight(steps(1));", false],
-        a4: ["runRight(steps[3]); runDown(steps[3]); runRight(steps[1]);", false]}],
-  q8: ["Level 3.8: <br> var riverWidth = 1; var riverDepth = 'deep'; <br> if (condition) {buildBridge();} else {goHome();};",
-      {a1: ["Condition is: riverWidth === 1 && riverDepth = 'deep'", false],
+        a4: ["runRight(steps[3]); runDown(steps[3]); runRight(steps[1]);", false]},
+  q8: {q: "Level 3.8: <br> var riverWidth = 1; var riverDepth = 'deep'; <br> if (condition) {buildBridge();} else {goHome();};",
+        a1: ["Condition is: riverWidth === 1 && riverDepth = 'deep'", false],
         a2: ["Condition is: riverWidth >= 1 && riverDepth === 'deep'", true],
         a3: ["Condition is: riverWidth == 1 && riverDepth != 'deep'", false],
-        a4: ["Condition is: riverWidth < 1 && riverDepth == 'deep'", false]}],
-  q9: ["Level 3.9: <br> var bridgeExists = true; if (condition) {goHome();} else {crossBridge();}",
-      {a1: ["Condition is: bridgeExists === true", false],
+        a4: ["Condition is: riverWidth < 1 && riverDepth == 'deep'", false]},
+  q9: {q: "Level 3.9: <br> var bridgeExists = true; if (condition) {goHome();} else {crossBridge();}",
+        a1: ["Condition is: bridgeExists === true", false],
         a2: ["Condition is: bridgeexists === false", false],
         a3: ["Condition is: bridgeExists !== true", true],
-        a4: ["Condition is: bridgeExists = false", false]}],
-  q10a: ["Level 3.10a: <br> function runToExit(a, b, c) {runRight(a); runUp(b); runRight(c);};",
-      {a1: ["runToExit(1, 2, 1);", true],
+        a4: ["Condition is: bridgeExists = false", false]},
+  q10a: {q: "Level 3.10a: <br> function runToExit(a, b, c) {runRight(a); runUp(b); runRight(c);};",
+        a1: ["runToExit(1, 2, 1);", true],
         a2: ["runToExit(b = 2, a = 1, c = 1);", false],
         a3: ["var a = 1; var b = 2; var c = 1; runToExit();", false],
-        a4: ["runToExit(1; 2; 1);", false]}],
-  q10b: ["Level 3.10b: <br> function runToExit(a, b, c) {runRight(a); runDown(b); runRight(c);};",
-      {a1: ["runToExit(b = 2, a = 1, c = 1);", false],
+        a4: ["runToExit(1; 2; 1);", false]},
+  q10b: {q: "Level 3.10b: <br> function runToExit(a, b, c) {runRight(a); runDown(b); runRight(c);};",
+        a1: ["runToExit(b = 2, a = 1, c = 1);", false],
         a2: ["var a = 1; var b = 2; var c = 1; runToExit();", false],
         a3: ["runToExit{1, 2, 1};", false],
-        a4: ["runToExit(1, 2, 1);", true]}],
+        a4: ["runToExit(1, 2, 1);", true]},
 }
 
 function getQuestionNumber() {
@@ -267,7 +267,7 @@ function getQuestionNumber() {
 
 function addQuestion() {
   var question = getQuestionNumber();
-  var text = quiz[question][0];
+  var text = quiz[question].q;
   questionBox.innerHTML = text;
 }
 
@@ -275,7 +275,7 @@ function addAnswers() {
   var question = getQuestionNumber();
   for (var i = 0; i < 4; i++) {
     var answer = "a" + (i + 1);
-    var text = quiz[question][1][answer][0];
+    var text = quiz[question][answer][0];
     answerBoxes[i].innerHTML = text;
   }
 }
@@ -320,11 +320,11 @@ function handleAnswerClick(e) {
     var a = "a4";
   }
   if (state.questionNumber === 2) {
-    state.pathBranch = quiz[question][1][a][2];
+    state.pathBranch = quiz[question][a][2];
   } else if (state.questionNumber === 5) {
-    state.pathBranch = quiz[question][1][a][2];
+    state.pathBranch = quiz[question][a][2];
   }
-  var answerTrue = quiz[question][1][a][1];
+  var answerTrue = quiz[question][a][1];
   if (state.quizMode === "started" && answerTrue === true) {
     for (var i = 0; i < 4; i++) {
       answerBoxes[i].removeEventListener("click", handleAnswerClick);
