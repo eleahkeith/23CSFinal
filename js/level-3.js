@@ -58,7 +58,9 @@ function drawMaze() {
   for (var y = 0; y < maze.length; y++) {
     for (var x = 0; x < maze[y].length; x++) {
       if (maze[y][x] === 0 || maze[y][x] === 1) {
-        ctx.strokeStyle = "#BEBEBE";
+        ctx.fillStyle = "#BEBEBE";
+        ctx.fillRect (x * boxSize, y * boxSize, boxSize, boxSize);
+        ctx.strokeStyle = "#5C5C5C";
         ctx.lineWidth = 1;
         ctx.strokeRect(x * boxSize, y * boxSize, boxSize, boxSize);
       }
