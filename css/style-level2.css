@@ -47,11 +47,14 @@ header {
 }
 /* Maze */
 canvas {
-  width: 21em;
-  height: 16em;
-  margin: .125em;
+  margin: .25rem auto 0;
+  box-sizing: border-box;
+  width: 95%;
+  max-width: 500px;
+  height: calc(95vw * 0.75);
+  max-height: 375px;
   display: block;
-  border: .07em solid black;
+  border: 2px solid black;
 }
 
 /* Questions */
@@ -76,3 +79,16 @@ footer {
   color: #59EA59;
   height: 2.5em;
 }
+
+/* MEDIA QUERIES */
+@media only screen and (min-width: 600px) {
+  .question, .answer {
+    font-size: 1.25rem;
+    padding: .5rem;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .burger-icon {
+    display: none;
+  }
