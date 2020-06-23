@@ -10,7 +10,20 @@ var body = document.querySelector("body");
 var boxSize = canvas.width / 20;
 
 var state = {
-
+  playerX: boxSize * 15,
+  playerY: boxSize * 1,
+  gameEndX: boxSize * 19,
+  gameEndY: boxSize * 6,
+  playerSpeed: boxSize/10,
+  questionOneX: boxSize * 13,
+  questionOneY: boxSize * 1,
+  questionTwoX: boxSize * 2,
+  questionTwoY: boxSize * 1,
+  questionThreeX: boxSize * 2,
+  questionThreeY: boxSize * 9,
+  questionFourX: boxSize * 8,
+  questionFourY1: boxSize * 9,
+  questionFourY2: boxSize * 13,
 }
 
 var maze = [
@@ -31,7 +44,10 @@ var maze = [
   [3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,5,5,5,5,5]
 ];
 
-
+function clearCanvas() {
+  ctx.fillStyle="white";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+}
 
 function drawMaze() {
   for(var y = 0; y < maze.length; y++) {
@@ -56,11 +72,71 @@ function drawMaze() {
 }
 
 function drawPlayer() {
+  ctx.drawImage(characterIcon, state.playerX, state.playerY, boxSize, boxSize);
+}
+
+function pathToQuestionOne() {
+  if (state.playerX >= state.questionOneX) {
+    state.playerX -= state.playerSpeed;
+    console.log(state.playerX);
+  }
+}
+
+function pathToQuestionTwo() {
+  if (state.playerX >= state.questionTwoX && state.playerY === state.questionTwoY) {
+    state.playerX -= state.playerSpeed;
+    console.log("hi");
+  }
+}
+
+function pathToQuestionThree() {
+  if (state.playerY <= state.questionThreeY && state.playerX <= state.questionThreeX) {
+    state.playerY += state.playerSpeed;
+  }
+}
+
+function questionFour1() {
+  if ((state.playerX <= state.questionFourX) && (state.playerY >= state.questionFourY1)) {
+    state.playerX += state.playerSpeed;
+  }
+}
+
+function questionFour2() {
+  if (state.playerX >= state.questionFourX && state.playerY <= state.questionFourY2 && state.playerY >= state.questionFourY1) {
+    state.playerY += state.playerSpeed;
+  }
+}
+
+async function pathToQuestionFour() {
+  await questionFour1();
+  questionFour2();
+}
+
+function pathToQuestionFive() {
 
 }
 
-function movePlayer() {
+function pathToTrophy() {
 
 }
 
-drawMaze();
+function masterPath() {
+  pathToQuestionOne();
+  pathToQuestionTwo();
+  pathToQuestionThree();
+  pathToQuestionFour();
+  pathToQuestionFive();
+  pathToTrophy();
+}
+
+function runGame() {
+  clearCanvas();
+  drawMaze();
+  drawPlayer();
+  masterPath();
+}
+
+setInterval(runGame,50);
+
+
+// tomorrow - push x and y positions into an array in the state, then refer to those when calling the next function
