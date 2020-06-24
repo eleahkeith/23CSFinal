@@ -75,6 +75,14 @@ div#canvas-images {
 }
 
 /* answers */
+
+.correct-answer {
+  width: 21em;
+  height: 2.5em;
+  margin: .25em;
+  border: .07em solid black;
+}
+
 .answer {
   width: 21em;
   height: 2.5em;

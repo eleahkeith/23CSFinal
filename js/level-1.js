@@ -14,8 +14,6 @@ var state = {
   playerY: boxSize * 1,
   playerTargetX: boxSize * 13,
   playerTargetY: boxSize * 1,
-  gameEndX: boxSize * 19,
-  gameEndY: boxSize * 6,
   playerSpeed: boxSize/10,
   targetPositions: [{x: boxSize * 13, y: boxSize * 1}, {x: boxSize * 2, y: boxSize * 1}, {x: boxSize * 2, y: boxSize * 9}, {x: boxSize * 8, y: boxSize * 13}, {x: boxSize * 17, y: boxSize * 10}],
   targetPositionIndex: 0
@@ -70,7 +68,7 @@ function drawPlayer() {
   ctx.drawImage(characterIcon, state.playerX, state.playerY, boxSize, boxSize);
 }
 
-function pathToQuestionOne() {
+function masterPath() {
   var isMovingLeft = state.playerX > state.playerTargetX;
   var isMovingUp = state.playerY > state.playerTargetY;
   var isMovingRight = state.playerX < state.playerTargetX;
@@ -82,7 +80,7 @@ function pathToQuestionOne() {
   var distanceFromTargetX = Math.abs(state.playerX - state.playerTargetX);
   var distanceFromTargetY = Math.abs(state.playerY - state.playerTargetY);
   if (distanceFromTargetX <= 0 && distanceFromTargetY <= 0) {
-    arriveAtTarget();
+    console.log("i love you");
   } else if (isMovingLeft) {
     state.playerX += movePlayerLeft;
   } else if (isMovingRight) {
@@ -94,62 +92,26 @@ function pathToQuestionOne() {
   }
 }
 
-function arriveAtTarget() {
+function updateTarget() {
   // if person presses/clicks, do this so she moves again
   state.targetPositionIndex += 1;
   var newTargetPosition = state.targetPositions[state.targetPositionIndex];
   state.playerTargetX = newTargetPosition.x;
   state.playerTargetY = newTargetPosition.y;
 }
-// function pathToQuestionTwo() {
-//   if (state.playerX >= state.questionTwoX && state.playerY === state.questionTwoY) {
-//     state.playerX -= state.playerSpeed;
-//     console.log("hi");
-//   }
-// }
-//
-// function pathToQuestionThree() {
-//   if (state.playerY <= state.questionThreeY && state.playerX <= state.questionThreeX) {
-//     state.playerY += state.playerSpeed;
-//   }
-// }
-//
-// async function questionFour1() {
-//   return new Promise(function (resolve, reject) {
-//     var playerAtGoal = (state.playerX <= state.questionFourX) && (state.playerY >= state.questionFourY1);
-//     if (playerAtGoal) {
-//       state.playerX += state.playerSpeed;
-//     }
-//   })
-// }
-//
-// function questionFour2() {
-//   if (state.playerX >= state.questionFourX && state.playerY <= state.questionFourY2 && state.playerY >= state.questionFourY1) {
-//     state.playerY += state.playerSpeed;
-//   }
-// }
-//
-// async function pathToQuestionFour() {
-//   await questionFour1();
-//   questionFour2();
-// }
 
-function pathToQuestionFive() {
-
+function displayQuestion() {
+  //code that displays question when player hits target
+  // if question is right, call arriveAtTarget
 }
 
-function pathToTrophy() {
-
+function clickHandler(e){
+  console.log("you clicked")
+  //match up where user clicks/touches to the correct answer
+  //if correct, call arriveAtTarget
 }
 
-function masterPath() {
-  pathToQuestionOne();
-  // pathToQuestionTwo();
-  // pathToQuestionThree();
-  // pathToQuestionFour();
-  // pathToQuestionFive();
-  // pathToTrophy();
-}
+
 
 function runGame() {
   clearCanvas();
@@ -158,7 +120,70 @@ function runGame() {
   masterPath();
 }
 
+var question = document.querySelector(".question");
+var choices = Array.from(document.querySelectorAll(".answer"));
+var currentQuestion = {};
+var questionIndex = 0;
+console.log(choices);
+
+var questions = [
+  {
+    question: 'What day is today?',
+    choice1: 'Monday',
+    choice2: 'Tuesday',
+    choice3: 'Wednesday',
+    choice4: 'Thursday',
+    answer: 1
+  },
+  {
+    question: 'What time is it?',
+    choice1: '1:00',
+    choice2: '2:00',
+    choice3: '3:00',
+    choice4: '4:00',
+    answer: 2
+  },
+  {
+    question: 'What is your name?',
+    choice1: 'Leah',
+    choice2: 'Lucie',
+    choice3: 'Piroschka',
+    choice4: 'Nemiri',
+    answer: 3
+  },
+  {
+    question: 'Question 4',
+    choice1: 'Answer A',
+    choice2: 'Answer B',
+    choice3: 'Answer C',
+    choice4: 'Answer D',
+    answer: 4
+  },
+  {
+    question: 'Question 5',
+    choice1: 'Answer 1',
+    choice2: 'Answer 2',
+    choice3: 'Answer 3',
+    choice4: 'Answer 4',
+    answer: 1
+  }
+]
+
+function getNextQuestion() {
+  questionIndex++;
+  var currentQuestion = questions[questionIndex];
+  question.innerText = currentQuestion.question;
+
+  choices.forEach(function (choice, index) {
+    choice.innerText = currentQuestion[`choice${index + 1}`];
+  });
+
+}
+
+getNextQuestion();
 setInterval(runGame,50);
 
+
+body.addEventListener("click", updateTarget);
 
 // tomorrow - push x and y positions into an array in the state, then refer to those when calling the next function
