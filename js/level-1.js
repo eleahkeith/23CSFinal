@@ -12,18 +12,13 @@ var boxSize = canvas.width / 20;
 var state = {
   playerX: boxSize * 15,
   playerY: boxSize * 1,
+  playerTargetX: boxSize * 13,
+  playerTargetY: boxSize * 1,
   gameEndX: boxSize * 19,
   gameEndY: boxSize * 6,
   playerSpeed: boxSize/10,
-  questionOneX: boxSize * 13,
-  questionOneY: boxSize * 1,
-  questionTwoX: boxSize * 2,
-  questionTwoY: boxSize * 1,
-  questionThreeX: boxSize * 2,
-  questionThreeY: boxSize * 9,
-  questionFourX: boxSize * 8,
-  questionFourY1: boxSize * 9,
-  questionFourY2: boxSize * 13,
+  targetPositions: [{x: boxSize * 13, y: boxSize * 1}, {x: boxSize * 2, y: boxSize * 1}, {x: boxSize * 2, y: boxSize * 9}, {x: boxSize * 8, y: boxSize * 13}, {x: boxSize * 17, y: boxSize * 10}],
+  targetPositionIndex: 0
 }
 
 var maze = [
@@ -37,7 +32,7 @@ var maze = [
   [3,4,0,4,0,4,3,3,3,3,2,3,4,0,4,2,3,5,5,0],
   [3,4,0,4,0,4,4,4,4,3,2,3,4,0,4,2,3,5,5,0],
   [3,4,1,0,0,0,0,0,0,3,2,2,2,4,3,2,3,5,5,0],
-  [3,3,3,3,3,3,3,3,0,4,4,3,2,3,2,2,3,0,0,1],
+  [3,3,3,3,3,3,3,3,0,4,4,3,2,3,2,2,3,1,0,0],
   [3,3,3,0,0,0,3,3,0,3,3,3,2,2,2,3,5,0,5,0],
   [3,2,2,3,3,0,3,3,0,4,4,4,4,4,3,5,5,0,5,0],
   [3,2,2,3,3,0,0,0,1,0,0,0,0,0,0,0,0,0,5,5],
@@ -76,41 +71,68 @@ function drawPlayer() {
 }
 
 function pathToQuestionOne() {
-  if (state.playerX >= state.questionOneX) {
-    state.playerX -= state.playerSpeed;
-    console.log(state.playerX);
+  var isMovingLeft = state.playerX > state.playerTargetX;
+  var isMovingUp = state.playerY > state.playerTargetY;
+  var isMovingRight = state.playerX < state.playerTargetX;
+  var isMovingDown = state.playerY < state.playerTargetY;
+  var movePlayerUp = state.playerSpeed * -1;
+  var movePlayerLeft = state.playerSpeed * -1;
+  var movePlayerDown = state.playerSpeed;
+  var movePlayerRight = state.playerSpeed;
+  var distanceFromTargetX = Math.abs(state.playerX - state.playerTargetX);
+  var distanceFromTargetY = Math.abs(state.playerY - state.playerTargetY);
+  if (distanceFromTargetX <= 0 && distanceFromTargetY <= 0) {
+    arriveAtTarget();
+  } else if (isMovingLeft) {
+    state.playerX += movePlayerLeft;
+  } else if (isMovingRight) {
+    state.playerX += movePlayerRight;
+  } else if (isMovingUp) {
+    state.playerY += movePlayerUp;
+  } else if (isMovingDown) {
+    state.playerY += movePlayerDown;
   }
 }
 
-function pathToQuestionTwo() {
-  if (state.playerX >= state.questionTwoX && state.playerY === state.questionTwoY) {
-    state.playerX -= state.playerSpeed;
-    console.log("hi");
-  }
+function arriveAtTarget() {
+  // if person presses/clicks, do this so she moves again
+  state.targetPositionIndex += 1;
+  var newTargetPosition = state.targetPositions[state.targetPositionIndex];
+  state.playerTargetX = newTargetPosition.x;
+  state.playerTargetY = newTargetPosition.y;
 }
-
-function pathToQuestionThree() {
-  if (state.playerY <= state.questionThreeY && state.playerX <= state.questionThreeX) {
-    state.playerY += state.playerSpeed;
-  }
-}
-
-function questionFour1() {
-  if ((state.playerX <= state.questionFourX) && (state.playerY >= state.questionFourY1)) {
-    state.playerX += state.playerSpeed;
-  }
-}
-
-function questionFour2() {
-  if (state.playerX >= state.questionFourX && state.playerY <= state.questionFourY2 && state.playerY >= state.questionFourY1) {
-    state.playerY += state.playerSpeed;
-  }
-}
-
-async function pathToQuestionFour() {
-  await questionFour1();
-  questionFour2();
-}
+// function pathToQuestionTwo() {
+//   if (state.playerX >= state.questionTwoX && state.playerY === state.questionTwoY) {
+//     state.playerX -= state.playerSpeed;
+//     console.log("hi");
+//   }
+// }
+//
+// function pathToQuestionThree() {
+//   if (state.playerY <= state.questionThreeY && state.playerX <= state.questionThreeX) {
+//     state.playerY += state.playerSpeed;
+//   }
+// }
+//
+// async function questionFour1() {
+//   return new Promise(function (resolve, reject) {
+//     var playerAtGoal = (state.playerX <= state.questionFourX) && (state.playerY >= state.questionFourY1);
+//     if (playerAtGoal) {
+//       state.playerX += state.playerSpeed;
+//     }
+//   })
+// }
+//
+// function questionFour2() {
+//   if (state.playerX >= state.questionFourX && state.playerY <= state.questionFourY2 && state.playerY >= state.questionFourY1) {
+//     state.playerY += state.playerSpeed;
+//   }
+// }
+//
+// async function pathToQuestionFour() {
+//   await questionFour1();
+//   questionFour2();
+// }
 
 function pathToQuestionFive() {
 
@@ -122,11 +144,11 @@ function pathToTrophy() {
 
 function masterPath() {
   pathToQuestionOne();
-  pathToQuestionTwo();
-  pathToQuestionThree();
-  pathToQuestionFour();
-  pathToQuestionFive();
-  pathToTrophy();
+  // pathToQuestionTwo();
+  // pathToQuestionThree();
+  // pathToQuestionFour();
+  // pathToQuestionFive();
+  // pathToTrophy();
 }
 
 function runGame() {
