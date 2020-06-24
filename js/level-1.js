@@ -16,7 +16,8 @@ var state = {
   playerTargetY: boxSize * 1,
   playerSpeed: boxSize/10,
   targetPositions: [{x: boxSize * 13, y: boxSize * 1}, {x: boxSize * 2, y: boxSize * 1}, {x: boxSize * 2, y: boxSize * 9}, {x: boxSize * 8, y: boxSize * 13}, {x: boxSize * 17, y: boxSize * 10}],
-  targetPositionIndex: 0
+  targetPositionIndex: 0,
+  questionMode: false
 }
 
 var maze = [
@@ -69,26 +70,28 @@ function drawPlayer() {
 }
 
 function masterPath() {
-  var isMovingLeft = state.playerX > state.playerTargetX;
-  var isMovingUp = state.playerY > state.playerTargetY;
-  var isMovingRight = state.playerX < state.playerTargetX;
-  var isMovingDown = state.playerY < state.playerTargetY;
-  var movePlayerUp = state.playerSpeed * -1;
-  var movePlayerLeft = state.playerSpeed * -1;
-  var movePlayerDown = state.playerSpeed;
-  var movePlayerRight = state.playerSpeed;
-  var distanceFromTargetX = Math.abs(state.playerX - state.playerTargetX);
-  var distanceFromTargetY = Math.abs(state.playerY - state.playerTargetY);
-  if (distanceFromTargetX <= 0 && distanceFromTargetY <= 0) {
-    console.log("i love you");
-  } else if (isMovingLeft) {
-    state.playerX += movePlayerLeft;
-  } else if (isMovingRight) {
-    state.playerX += movePlayerRight;
-  } else if (isMovingUp) {
-    state.playerY += movePlayerUp;
-  } else if (isMovingDown) {
-    state.playerY += movePlayerDown;
+  if (state.questionMode === false) {
+    var isMovingLeft = state.playerX > state.playerTargetX;
+    var isMovingUp = state.playerY > state.playerTargetY;
+    var isMovingRight = state.playerX < state.playerTargetX;
+    var isMovingDown = state.playerY < state.playerTargetY;
+    var movePlayerUp = state.playerSpeed * -1;
+    var movePlayerLeft = state.playerSpeed * -1;
+    var movePlayerDown = state.playerSpeed;
+    var movePlayerRight = state.playerSpeed;
+    var distanceFromTargetX = Math.abs(state.playerX - state.playerTargetX);
+    var distanceFromTargetY = Math.abs(state.playerY - state.playerTargetY);
+    if (distanceFromTargetX <= 0 && distanceFromTargetY <= 0) {
+      getNextQuestion();
+    } else if (isMovingLeft) {
+      state.playerX += movePlayerLeft;
+    } else if (isMovingRight) {
+      state.playerX += movePlayerRight;
+    } else if (isMovingUp) {
+      state.playerY += movePlayerUp;
+    } else if (isMovingDown) {
+      state.playerY += movePlayerDown;
+    }
   }
 }
 
@@ -105,12 +108,6 @@ function displayQuestion() {
   // if question is right, call arriveAtTarget
 }
 
-function clickHandler(e){
-  console.log("you clicked")
-  //match up where user clicks/touches to the correct answer
-  //if correct, call arriveAtTarget
-}
-
 
 
 function runGame() {
@@ -123,7 +120,7 @@ function runGame() {
 var question = document.querySelector(".question");
 var choices = Array.from(document.querySelectorAll(".answer"));
 var currentQuestion = {};
-var questionIndex = 0;
+var questionIndex = -1;
 console.log(choices);
 
 var questions = [
@@ -170,6 +167,7 @@ var questions = [
 ]
 
 function getNextQuestion() {
+  state.questionMode = true;
   questionIndex++;
   var currentQuestion = questions[questionIndex];
   question.innerText = currentQuestion.question;
@@ -180,10 +178,16 @@ function getNextQuestion() {
 
 }
 
-getNextQuestion();
+choices.forEach(function (choice, index) {
+  choice.addEventListener("click", function () {
+    var currentQuestion = questions[questionIndex];
+    var isCorrect = currentQuestion.answer === index + 1;
+    if (isCorrect) {
+      alert("great job");
+      state.questionMode = false;
+      updateTarget();
+    }
+  })
+})
+
 setInterval(runGame,50);
-
-
-body.addEventListener("click", updateTarget);
-
-// tomorrow - push x and y positions into an array in the state, then refer to those when calling the next function
