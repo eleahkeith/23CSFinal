@@ -1,8 +1,8 @@
 /* Styling */
 /* color: #59EA59; */
-/* font-family: 'Rationale', sans-serif; */
 /* font-family: 'VT323', monospace; */
 
+/* GENERAL */
 body {
   min-height: 100vh;
   font-family: 'VT323', monospace;
@@ -122,14 +122,6 @@ canvas {
   cursor: pointer;
 }
 
-.answer:hover {
-  box-shadow: 0px 0px 4px #000;
-}
-
-.answer:active {
-  box-shadow: 0px 0px 1px #000;
-}
-
 /* FOOTER */
 footer {
   margin-top: auto;
@@ -144,6 +136,24 @@ footer {
 }
 
 /* MEDIA QUERIES */
+
+/* If the user's primary input mechanism can hover over elements: */
+@media(hover: hover) {
+  .answer:hover {
+    box-shadow: 0px 0px 5px #000;
+  }
+  .answer:active {
+    box-shadow: 0px 0px 1px #000;
+  }
+}
+
+/* If the user's primary input mechanism can't hover over elements: */
+@media(hover: none) {
+  .answer:active {
+    box-shadow: inset 0px 0px 4px #000;
+  }
+}
+
 @media only screen and (min-width: 600px) {
   #question, .answer {
     font-size: 1.25rem;
