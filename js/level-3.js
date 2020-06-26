@@ -16,6 +16,7 @@ var state = {
   pathBranch: "",
   characterX: 1,
   characterY: 14,
+  nextQuestionDelay: 0,
 }
 
 // CANVAS & MAZE
@@ -155,6 +156,7 @@ const paths = {
 function updateCanvas() {
   if (state.questionNumber === 8) {
     drawBridge();
+    state.nextQuestionDelay = 1;
   } else {
     var path = "path" + state.questionNumber
     if ([1, 4, 9].includes(state.questionNumber)) {
@@ -169,6 +171,7 @@ function updateCanvas() {
     for (var i = 0; i < paths[path].length; i++) {
       moveCharacter(i, path);
     }
+    state.nextQuestionDelay = i;
   }
 }
 
@@ -335,9 +338,9 @@ function handleAnswerClick(e) {
     updateCanvas();
     if (state.questionNumber === 10) {
       state.quizMode = "completed";
-      setTimeout(drawLevelCompleteScreen, 2000);
+      setTimeout(drawLevelCompleteScreen, 150 * state.nextQuestionDelay);
     } else {
-      setTimeout(nextQuestion, 2000);
+      setTimeout(nextQuestion, 150 * state.nextQuestionDelay);
     }
   } else if (state.quizMode === "started" && answerTrue === false) {
     e.target.style.color = "#FF0000";
