@@ -1,45 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="../css/reset.css">
-  <link rel="stylesheet" type="text/css" href="../css/style-level2.css">
-  <link href="https://fonts.googleapis.com/css2?family=Rationale&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../css/style-level3.css">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <title>Level 2</title>
 </head>
 
 <body>
-  <header>
-    <div class="container" onclick="myFunction(this)">
-      <div class="bar1"></div>
-      <div class="bar2"></div>
-      <div class="bar3"></div>
-    </div>
-  </header>
 
-  <main class="container">
-    <div style="display:none;">
+    <!-- Burger Menu -->
+    <nav>
+      <div class="burger-icon">
+        <div id="bar1"></div>
+        <div id="bar2"></div>
+        <div id="bar3"></div>
+      </div>
+      <ul class="container">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="level-1.html">Game</a></li>
+      </ul>
+    </nav>
+
+    <!-- Canvas mages -->
+    <div class="canvas-images">
       <img id="treeimage" src="../images/tree.png">
       <img id="houseimage" src="../images/house.png">
       <img id="cityimage" src="../images/city.png">
       <img id="starimage" src="../images/star.png">
+      <img id="trophyimage" src="../images/trophy.png">
+      <img id="characterimage" src="../images/characterIcon.png">
     </div>
 
+    <!-- Canvas -->
     <canvas id="screen"></canvas>
 
-    <div>
-      <div class="question">Question</div>
-      <div class="answer">Answer 1</div>
-      <div class="answer">Answer 2</div>
-      <div class="answer">Answer 3</div>
-      <div class="answer">Answer 4</div>
-    </div>
-  </main>
+    <!-- Question and answers -->
+    <p id="question">Question</p>
+    <p id="answer1" class="answer">Answer 1</p>
+    <p id="answer2" class="answer">Answer 2</p>
+    <p id="answer3" class="answer">Answer 3</p>
+    <p id="answer4" class="answer">Answer 4</p>
 
-  <footer>
-    <div>Copyright</div>
+  <!-- Footer -->
+  <footer class="container">
+    <span id="copyright">Copyright</span>
   </footer>
 
   <script type="text/javascript" src="../js/level-2.js"></script>

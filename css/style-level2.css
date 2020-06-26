@@ -6,7 +6,15 @@
 
 /* Body */
 body {
-  font-family: 'Rationale', sans-serif;
+  font-family: 'VT323', monospace;
+  display: flex;
+  flex-direction: column;
+}
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 /* Header */
