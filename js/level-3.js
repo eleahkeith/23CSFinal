@@ -262,6 +262,20 @@ const quiz = {
         a4: ["runToExit(1, 2, 1);", true]},
 }
 
+function quizVisibility(value) {
+  if (value === "hidden") {
+    questionBox.style.visibility = "hidden";
+    for (var i = 0; i < 4; i++) {
+      answerBoxes[i].style.visibility = "hidden";
+    }
+  } else if (value === "visible") {
+    questionBox.style.visibility = "visible";
+    for (var i = 0; i < 4; i++) {
+      answerBoxes[i].style.visibility = "visible";
+    }
+  }
+}
+
 function getQuestionNumber() {
   if ([3, 6, 7, 10].includes(state.questionNumber)) {
     return "q" + state.questionNumber + state.pathBranch;
@@ -287,6 +301,7 @@ function addAnswers() {
 
 function startQuiz() {
   state.quizMode = "started";
+  quizVisibility("visible");
   drawMaze();
   drawCharacter();
   addQuestion();
@@ -339,6 +354,7 @@ function handleAnswerClick(e) {
     if (state.questionNumber === 10) {
       state.quizMode = "completed";
       setTimeout(drawLevelCompleteScreen, 150 * state.nextQuestionDelay);
+      setTimeout(function() {quizVisibility("hidden")}, 150 * state.nextQuestionDelay);
     } else {
       setTimeout(nextQuestion, 150 * state.nextQuestionDelay);
     }
