@@ -1,17 +1,20 @@
 /* Styling */
 /* color: #59EA59; */
-/* font-family: 'Rationale', sans-serif; */
-
-
+/* font-family: 'VT323', monospace; */
 
 /* Body */
 body {
   min-height: 100vh;
-  font-family: 'Rationale', sans-serif;
+  font-family: 'VT323', monospace;
   color: #000;
   background-color: #fff;
   display: flex;
   flex-direction: column;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 /* Header */
@@ -20,39 +23,92 @@ header {
   padding: 1em;
 }
 
+h1 {
+  margin: .5rem;
+  font-size: 2.5em;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 3px 3px #59EA59;
+}
+
+h2 {
+  margin: .5rem;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+}
+
 /* Menu */
-.container {
-  display: inline-block;
+nav {
+  position: relative;
+  background: #000;
+  min-height: 41px;
+}
+
+a {
+  padding: .25rem;
+  text-decoration: none;
+  color: #59EA59;
+}
+
+nav ul {
+  padding: .2em 0;
+  align-items: center;
+  flex-direction: column;
+  background: #000;
+  border-bottom: 1px solid #59EA59;
+  line-height: 1.5;
+  font-size: 0;
+  transition: 1s;
+  position: absolute;
+  z-index: 1;
+  width: 100vw;
+}
+
+ul.container.burger-open {
+  font-size: 1.75em;
+}
+
+/* BURGER ICON */
+.burger-icon {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  top: 1px;
+  left: 1px;
+  padding: 5px 5px;
+  width: 40px;
   cursor: pointer;
 }
 
-.bar1, .bar2, .bar3 {
-  width: 2.3em;
-  height: .3em;
+.burger-icon div {
+  margin: 5px 5px;
+  width: 30px;
+  height: 3px;
   background-color: #59EA59;
-  margin: .25em 0;
-  transition: 0.4s;
+  transition: 0.5s;
 }
 
-/* Rotate first bar */
-.change .bar1 {
-  -webkit-transform: rotate(-45deg) translate(-.5em, .4em);
-  transform: rotate(-45deg) translate(-.5em, .4em);
+.transform #bar1 {
+  transform: rotate(-45deg) translate(-4px, 5px);
 }
 
-/* Fade out the second bar */
-.change .bar2 {
+.transform #bar2 {
   opacity: 0;
 }
 
-/* Rotate last bar */
-.change .bar3 {
-  -webkit-transform: rotate(45deg) translate(-.5em, -.5em);
-  transform: rotate(45deg) translate(-.5em, -.5em);
+.transform #bar3 {
+  transform: rotate(45deg) translate(-6px, -8px) ;
 }
-/* Maze */
+
+/* Canvas Images */
+.canvas-images {
+  display: none;
+}
+
+/* Canvas */
 canvas {
-  margin: .5rem auto 0;
+  margin: .25rem auto 0;
   box-sizing: border-box;
   width: 95%;
   max-width: 500px;
@@ -62,32 +118,29 @@ canvas {
   border: 2px solid black;
 }
 
-div#canvas-images {
-  display: none;
-}
-
 /* Questions */
-.question {
-  width: 21em;
-  height: 2.5em;
-  margin: .25em;
-  border: .07em solid black;
+#question {
+  box-sizing: border-box;
+  margin: auto;
+  padding: .25rem .5rem;
+  width: 95%;
+  max-width: 600px;
+  border: 1px solid black;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 /* answers */
-
-.correct-answer {
-  width: 21em;
-  height: 2.5em;
-  margin: .25em;
-  border: .07em solid black;
-}
-
 .answer {
-  width: 21em;
-  height: 2.5em;
-  margin: .25em;
-  border: .07em solid black;
+  box-sizing: border-box;
+  margin: auto;
+  padding: .25rem .5rem;
+  width: 95%;
+  max-width: 600px;
+  border: 1px solid black;
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 /* Footer */
@@ -95,4 +148,65 @@ footer {
   background-color: black;
   color: #59EA59;
   height: 2.5em;
+}
+
+/* MEDIA QUERIES */
+
+/* If the user's primary input mechanism can hover over elements: */
+@media(hover: hover) {
+  .answer:hover, .button:hover {
+    box-shadow: 0px 0px 5px #000;
+  }
+  .answer:active, .button:active {
+    box-shadow: 0px 0px 1px #000;
+  }
+}
+
+/* If the user's primary input mechanism can't hover over elements: */
+@media(hover: none) {
+  .answer:active, .button:active {
+    box-shadow: inset 0px 0px 4px #000;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  #question, .answer {
+    font-size: 1.25rem;
+    padding: .5rem;
+  }
+
+  h1 {
+    font-size: 3em;
+  }
+
+  h2, .button {
+    font-size: 2em;
+  }
+
+  main p {
+    font-size: 1.5em;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .burger-icon {
+    display: none;
+  }
+
+  nav ul {
+    position: static;
+    width: auto;
+    padding: .5rem;
+    font-size: 2em;
+    list-style-type: none;
+    background: #000;
+    color: #59EA59;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  #copyright {
+    padding: .5rem;
+    font-size: 1.25rem;
+  }
 }

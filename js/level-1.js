@@ -47,18 +47,30 @@ function drawMaze() {
   for(var y = 0; y < maze.length; y++) {
     for(var x = 0; x < maze[y].length; x++)
     {
+      if (maze[y][x] === 0 || maze[y][x] === 1 || maze[y][x] === 6) {
+        ctx.fillStyle = "#BEBEBE";
+        ctx.fillRect (x * boxSize, y * boxSize, boxSize, boxSize);
+        ctx.strokeStyle = "#5C5C5C";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(x * boxSize, y * boxSize, boxSize, boxSize);
+      }
       if(maze[y][x] === 1) {
         ctx.drawImage(starImage, x * boxSize, y * boxSize, boxSize, boxSize);
-      } else if (maze[y][x] === 2) {
-        ctx.fillStyle="blue";
+      }
+      if (maze[y][x] === 2) {
+        ctx.fillStyle="#3374FF";
         ctx.fillRect (x*boxSize, y*boxSize, boxSize, boxSize);
-      } else if (maze[y][x] === 3) {
+      }
+      if (maze[y][x] === 3) {
         ctx.drawImage(treeImage, x*boxSize, y*boxSize, boxSize, boxSize);
-      } else if (maze[y][x] === 4) {
+      }
+      if (maze[y][x] === 4) {
         ctx.drawImage(houseImage, x*boxSize, y*boxSize, boxSize, boxSize);
-      } else if (maze[y][x] === 5) {
+      }
+      if (maze[y][x] === 5) {
         ctx.drawImage(cityImage, x*boxSize, y*boxSize, boxSize, boxSize);
-      } else if (maze[y][x] === 6) {
+      }
+      if (maze[y][x] === 6) {
         ctx.drawImage(trophyImage, x * boxSize, y * boxSize, boxSize, boxSize);
       }
     }
@@ -117,11 +129,10 @@ function runGame() {
   masterPath();
 }
 
-var question = document.querySelector(".question");
+var question = document.querySelector("#question");
 var choices = Array.from(document.querySelectorAll(".answer"));
 var currentQuestion = {};
 var questionIndex = -1;
-console.log(choices);
 
 var questions = [
   {
