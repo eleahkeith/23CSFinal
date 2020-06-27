@@ -1,3 +1,13 @@
+// BURGER MENU
+const navItems = document.querySelector("nav ul");
+const burgerIcon = document.querySelector(".burger-icon");
+
+function toggleBurgerMenu(icon) {
+  icon.classList.toggle("transform");
+  navItems.classList.toggle("burger-open");
+}
+
+burgerIcon.addEventListener("click", function(){toggleBurgerMenu(this)});
 
 
 var canvas = document.querySelector("#screen");
@@ -8,13 +18,14 @@ var ctx = canvas.getContext("2d");
 var body = document.querySelector("body");
 
 var boxSize = canvas.width / 20;
+var quizVisibility = document.querySelector(".quiz");
 
 var state = {
   playerX: boxSize * 15,
   playerY: boxSize * 1,
   playerTargetX: boxSize * 13,
   playerTargetY: boxSize * 1,
-  playerSpeed: boxSize/10,
+  playerSpeed: 1,
   targetPositions: [{x: boxSize * 13, y: boxSize * 1}, {x: boxSize * 2, y: boxSize * 1}, {x: boxSize * 2, y: boxSize * 9}, {x: boxSize * 8, y: boxSize * 13}, {x: boxSize * 17, y: boxSize * 10}],
   targetPositionIndex: 0,
   questionMode: false
@@ -55,30 +66,30 @@ function drawMaze() {
         ctx.strokeRect(x * boxSize, y * boxSize, boxSize, boxSize);
       }
       if(maze[y][x] === 1) {
-        ctx.drawImage(starImage, x * boxSize, y * boxSize, boxSize, boxSize);
+        ctx.drawImage(starimage, x * boxSize, y * boxSize, boxSize, boxSize);
       }
       if (maze[y][x] === 2) {
         ctx.fillStyle="#3374FF";
         ctx.fillRect (x*boxSize, y*boxSize, boxSize, boxSize);
       }
       if (maze[y][x] === 3) {
-        ctx.drawImage(treeImage, x*boxSize, y*boxSize, boxSize, boxSize);
+        ctx.drawImage(treeimage, x*boxSize, y*boxSize, boxSize, boxSize);
       }
       if (maze[y][x] === 4) {
-        ctx.drawImage(houseImage, x*boxSize, y*boxSize, boxSize, boxSize);
+        ctx.drawImage(houseimage, x*boxSize, y*boxSize, boxSize, boxSize);
       }
       if (maze[y][x] === 5) {
-        ctx.drawImage(cityImage, x*boxSize, y*boxSize, boxSize, boxSize);
+        ctx.drawImage(cityimage, x*boxSize, y*boxSize, boxSize, boxSize);
       }
       if (maze[y][x] === 6) {
-        ctx.drawImage(trophyImage, x * boxSize, y * boxSize, boxSize, boxSize);
+        ctx.drawImage(trophyimage, x * boxSize, y * boxSize, boxSize, boxSize);
       }
     }
   }
 }
 
 function drawPlayer() {
-  ctx.drawImage(characterIcon, state.playerX, state.playerY, boxSize, boxSize);
+  ctx.drawImage(charactericon, state.playerX, state.playerY, boxSize, boxSize);
 }
 
 function masterPath() {
@@ -93,12 +104,15 @@ function masterPath() {
     var movePlayerRight = state.playerSpeed;
     var distanceFromTargetX = Math.abs(state.playerX - state.playerTargetX);
     var distanceFromTargetY = Math.abs(state.playerY - state.playerTargetY);
-    if (distanceFromTargetX <= 0 && distanceFromTargetY <= 0) {
+    quizVisibility.style.visibility="hidden";
+    if (distanceFromTargetX <= 1 && distanceFromTargetY <= 1) {
       getNextQuestion();
     } else if (isMovingLeft) {
       state.playerX += movePlayerLeft;
+      console.log(state.playerX);
     } else if (isMovingRight) {
       state.playerX += movePlayerRight;
+      console.log(state.playerX);
     } else if (isMovingUp) {
       state.playerY += movePlayerUp;
     } else if (isMovingDown) {
@@ -115,10 +129,6 @@ function updateTarget() {
   state.playerTargetY = newTargetPosition.y;
 }
 
-function displayQuestion() {
-  //code that displays question when player hits target
-  // if question is right, call arriveAtTarget
-}
 
 
 
@@ -178,7 +188,10 @@ var questions = [
 ]
 
 function getNextQuestion() {
+  state.playerX = state.playerTargetX;
+  state.playerY = state.playerTargetY;
   state.questionMode = true;
+  quizVisibility.style.visibility="visible";
   questionIndex++;
   var currentQuestion = questions[questionIndex];
   question.innerText = currentQuestion.question;
@@ -201,4 +214,4 @@ choices.forEach(function (choice, index) {
   })
 })
 
-setInterval(runGame,50);
+setInterval(runGame,20);
