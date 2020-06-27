@@ -8,14 +8,14 @@ const boxSize = canvas.width / 20;
 var state = {
   question: 1,
   character: { x: boxSize * 15, y: boxSize * 14 },
-  question1: { x: boxSize * 17, y: boxSize * 10, question: "Question 1", answers: ["1", "2", "3", "4"], correct: 2 },
-  question2: { x: boxSize * 18, y: boxSize * 2, question: "Question 2", answers: ["1", "2", "3", "4"], correct: 1 },
-  question3: { x: boxSize * 15, y: boxSize * 5, question: "Question 3", answers: ["1", "2", "3", "4"], correct: 4 },
-  question4: { x: boxSize * 12, y: boxSize * 10, question: "Question 4", answers: ["1", "2", "3", "4"], correct: 2 },
-  question5: { x: boxSize * 2, y: boxSize * 13, question: "Question 5", answers: ["1", "2", "3", "4"], correct: 3 },
-  question6: { x: boxSize * 3, y: boxSize * 8, question: "Question 6", answers: ["1", "2", "3", "4"], correct: 3 },
-  question7: { x: boxSize * 4, y: boxSize * 3, question: "Question 7", answers: ["1", "2", "3", "4"], correct: 2 },
-  question8: { x: boxSize * 2, y: boxSize * 2, question: "Question 8", answers: ["1", "2", "3", "4"], correct: 4 },
+  question1: { x: boxSize * 17, y: boxSize * 10, question: "Question 1", answers: ["1", "2", "3", "4"], correct: "answer2" },
+  question2: { x: boxSize * 18, y: boxSize * 2, question: "Question 2", answers: ["1", "2", "3", "4"], correct: "answer1" },
+  question3: { x: boxSize * 15, y: boxSize * 5, question: "Question 3", answers: ["1", "2", "3", "4"], correct: "answer4" },
+  question4: { x: boxSize * 12, y: boxSize * 10, question: "Question 4", answers: ["1", "2", "3", "4"], correct: "answer1" },
+  question5: { x: boxSize * 2, y: boxSize * 13, question: "Question 5", answers: ["1", "2", "3", "4"], correct: "answer3" },
+  question6: { x: boxSize * 3, y: boxSize * 8, question: "Question 6", answers: ["1", "2", "3", "4"], correct: "answer3" },
+  question7: { x: boxSize * 4, y: boxSize * 3, question: "Question 7", answers: ["1", "2", "3", "4"], correct: "answer2" },
+  question8: { x: boxSize * 2, y: boxSize * 2, question: "Question 8", answers: ["1", "2", "3", "4"], correct: "answer4" },
 }
 // Maze
 var maze = [
@@ -35,9 +35,6 @@ var maze = [
   [4, 0, 1, 0, 0, 4, 0, 3, 3, 0, 0, 4, 3, 0, 0, 0, 0, 0, 0, 4],
   [4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4],
 ]
-
-ctx.fillStyle = "#fff";
-ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 // Change var y to var mazeY and var x to var mazeX?
 function drawMaze() {
@@ -61,8 +58,7 @@ function drawMaze() {
         ctx.drawImage(houseimage, x * boxSize, y * boxSize, boxSize, boxSize);
       } else if (maze[y][x] === 5) {
         ctx.drawImage(cityimage, x * boxSize, y * boxSize, boxSize, boxSize);
-      }
-      else if (maze[y][x] === 6) {
+      } else if (maze[y][x] === 6) {
         ctx.drawImage(trophyimage, x * boxSize, y * boxSize, boxSize, boxSize);
       }
     }
@@ -70,9 +66,8 @@ function drawMaze() {
 }
 
 // Charactor and movement
-var characterimage = document.querySelector("#characterimage");
-
 function drawCharacter() {
+  const characterimage = document.querySelector("#characterimage");
   ctx.drawImage(characterimage, state.character.x, state.character.y, boxSize, boxSize);
 }
 
@@ -92,8 +87,7 @@ function moveRight(count) {
   state.character.x = state.character.x + boxSize * count;
 }
 
-// Questions and anwser
-
+// Questions and anwsers
 function setQuestionText(question) {
   let questionText = document.getElementById("question");
   let answer1 = document.getElementById("answer1");
@@ -111,32 +105,31 @@ function setQuestionText(question) {
 function getQuestion() {
   switch (state.question) {
     case 1:
-      setQuestionText(state.question1);
+      return state.question1;
       break;
     case 2:
-      setQuestionText(state.question2);
+      return state.question2;
       break;
     case 3:
-      setQuestionText(state.question3);
+      return state.question3;
       break;
     case 4:
-      setQuestionText(state.question4);
-      break;
+      return state.question4;
+            break;
     case 5:
-      setQuestionText(state.question5);
+      return state.question5;
       break;
     case 6:
-      setQuestionText(state.question6);
+      return state.question6;
       break;
     case 7:
-      setQuestionText(state.question7);
+      return state.question7;
       break;
     case 8:
-      setQuestionText(state.question8);
+      return state.question8;
       break;
     default:
-      setQuestionText(state.question1);
-
+      return state.question1;
   }
 }
 
@@ -144,7 +137,20 @@ function getQuestion() {
 function runGame() {
   drawMaze();
   drawCharacter();
-  getQuestion();
+  setQuestionText(getQuestion());
+}
+
+function answerQuestion(e) {
+   let question = getQuestion();
+  if (e.target.id === question.correct) {
+    state.question ++;
+    console.log("correct");
+  }
+  else {
+    console.log("wrong");
+  }
 }
 
 setInterval(runGame, 50);
+
+addEventListener("click", answerQuestion);
