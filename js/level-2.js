@@ -7,7 +7,7 @@ const boxSize = canvas.width / 20;
 
 var state = {
   question: 1,
-  character: { x: boxSize * 15, y: boxSize * 14 },
+  character: { x: boxSize * 15, y: boxSize * 14, interval: 200 },
   question1: { x: boxSize * 17, y: boxSize * 10, question: "Question 1", answers: ["1", "2", "3", "4"], correct: "answer2" },
   question2: { x: boxSize * 18, y: boxSize * 2, question: "Question 2", answers: ["1", "2", "3", "4"], correct: "answer1" },
   question3: { x: boxSize * 15, y: boxSize * 5, question: "Question 3", answers: ["1", "2", "3", "4"], correct: "answer4" },
@@ -86,28 +86,45 @@ function drawCharacter() {
   ctx.drawImage(characterimage, state.character.x, state.character.y, boxSize, boxSize);
 }
 
-function moveUp(count) {
-  state.character.y = state.character.y - boxSize * count;
+// https://www.sitepoint.com/delay-sleep-pause-wait/
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function moveDown(count) {
-  state.character.y = state.character.y + boxSize * count;
+async function moveUp(count) {
+  for (let i = 0; i < count; i++) {
+    state.character.y = state.character.y - boxSize;
+    await sleep(state.character.interval);
+  }
 }
 
-function moveLeft(count) {
-  state.character.x = state.character.x - boxSize * count;
+async function moveDown(count) {
+  for (let i = 0; i < count; i++) {
+    state.character.y = state.character.y + boxSize;
+    await sleep(state.character.interval);
+  }
 }
 
-function moveRight(count) {
-  state.character.x = state.character.x + boxSize * count;
+async function moveLeft(count) {
+  for (let i = 0; i < count; i++) {
+    state.character.x = state.character.x - boxSize;
+    await sleep(state.character.interval);
+  }
 }
 
-function correctAnswer() {
-  moveUp(1);
-  moveRight(3);
-  moveUp(2);
-  moveLeft(1);
-  moveUp(1);
+async function moveRight(count) {
+  for (let i = 0; i < count; i++) {
+    state.character.x = state.character.x + boxSize;
+    await sleep(state.character.interval);
+  }
+}
+
+async function correctAnswer() {
+  await moveUp(1);
+  await moveRight(3);
+  await moveUp(2);
+  await moveLeft(1);
+  await moveUp(1);
 }
 
 // Questions and anwsers
