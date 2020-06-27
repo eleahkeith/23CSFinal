@@ -17,10 +17,20 @@ var state = {
   question7: { x: boxSize * 4, y: boxSize * 3, question: "Question 7", answers: ["1", "2", "3", "4"], correct: "answer2" },
   question8: { x: boxSize * 2, y: boxSize * 2, question: "Question 8", answers: ["1", "2", "3", "4"], correct: "answer4" },
 }
+
+// Run game
+function runGame() {
+  drawMaze();
+  drawCharacter();
+  setQuestionText(getQuestion());
+}
+
+setInterval(runGame, 50);
+
 // Maze
 var maze = [
   [5, 6, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
-  [5, 0, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0],
+  [5, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0],
   [5, 5, 5, 5, 0, 5, 0, 5, 5, 0, 3, 3, 3, 0, 3, 0, 0, 0, 1, 0],
   [5, 0, 5, 0, 1, 5, 0, 0, 3, 3, 2, 2, 2, 0, 3, 3, 3, 3, 0, 3],
   [5, 0, 5, 0, 3, 3, 3, 3, 3, 3, 2, 3, 2, 0, 2, 2, 2, 2, 0, 2],
@@ -33,7 +43,7 @@ var maze = [
   [4, 0, 0, 4, 0, 0, 0, 0, 4, 0, 4, 0, 0, 0, 0, 0, 4, 0, 0, 4],
   [4, 0, 4, 4, 0, 4, 0, 4, 4, 0, 4, 4, 3, 4, 4, 0, 4, 4, 0, 4],
   [4, 0, 1, 0, 0, 4, 0, 3, 3, 0, 0, 4, 3, 0, 0, 0, 0, 0, 0, 4],
-  [4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4],
+  [4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4],
 ]
 
 // Change var y to var mazeY and var x to var mazeX?
@@ -49,16 +59,21 @@ function drawMaze() {
       }
       if (maze[y][x] === 1) {
         ctx.drawImage(starimage, x * boxSize, y * boxSize, boxSize, boxSize);
-      } else if (maze[y][x] === 2) {
+      }
+      else if (maze[y][x] === 2) {
         ctx.fillStyle = "blue";
         ctx.fillRect(x * boxSize, y * boxSize, boxSize, boxSize);
-      } else if (maze[y][x] === 3) {
+      }
+      else if (maze[y][x] === 3) {
         ctx.drawImage(treeimage, x * boxSize, y * boxSize, boxSize, boxSize);
-      } else if (maze[y][x] === 4) {
+      }
+      else if (maze[y][x] === 4) {
         ctx.drawImage(houseimage, x * boxSize, y * boxSize, boxSize, boxSize);
-      } else if (maze[y][x] === 5) {
+      }
+      else if (maze[y][x] === 5) {
         ctx.drawImage(cityimage, x * boxSize, y * boxSize, boxSize, boxSize);
-      } else if (maze[y][x] === 6) {
+      }
+      else if (maze[y][x] === 6) {
         ctx.drawImage(trophyimage, x * boxSize, y * boxSize, boxSize, boxSize);
       }
     }
@@ -85,6 +100,14 @@ function moveLeft(count) {
 
 function moveRight(count) {
   state.character.x = state.character.x + boxSize * count;
+}
+
+function correctAnswer() {
+  moveUp(1);
+  moveRight(3);
+  moveUp(2);
+  moveLeft(1);
+  moveUp(1);
 }
 
 // Questions and anwsers
@@ -115,7 +138,7 @@ function getQuestion() {
       break;
     case 4:
       return state.question4;
-            break;
+      break;
     case 5:
       return state.question5;
       break;
@@ -133,24 +156,21 @@ function getQuestion() {
   }
 }
 
-// Run game
-function runGame() {
-  drawMaze();
-  drawCharacter();
-  setQuestionText(getQuestion());
-}
-
+// User interaction
 function answerQuestion(e) {
-   let question = getQuestion();
-  if (e.target.id === question.correct) {
-    state.question ++;
-    console.log("correct");
-  }
-  else {
-    console.log("wrong");
+  if (e.target.id.startsWith("answer")) {
+    let question = getQuestion();
+    if (e.target.id === question.correct) {
+      state.question++;
+      correctAnswer();
+      e.target.style.borderColor = "green";
+      console.log("correct");
+    }
+    else {
+      e.target.style.borderColor = "red";
+      console.log("wrong");
+    }
   }
 }
-
-setInterval(runGame, 50);
 
 addEventListener("click", answerQuestion);
