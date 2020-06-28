@@ -170,43 +170,43 @@ var questionIndex = -1;
 
 var questions = [
   {
-    question: 'What day is today?',
-    choice1: 'Monday',
-    choice2: 'Tuesday',
-    choice3: 'Wednesday',
-    choice4: 'Thursday',
-    answer: 1
-  },
-  {
-    question: 'What time is it?',
-    choice1: '1:00',
-    choice2: '2:00',
-    choice3: '3:00',
-    choice4: '4:00',
+    question: 'What HTML tag is used to create a canvas?',
+    choice1: '<drawCanvas>',
+    choice2: '<canvas>',
+    choice3: '<div>',
+    choice4: '<container>',
     answer: 2
   },
   {
-    question: 'What is your name?',
-    choice1: 'Leah',
-    choice2: 'Lucie',
-    choice3: 'Piroschka',
-    choice4: 'Nemiri',
+    question: 'To move to the next goal, what axis or axes does Charlie need to move along?',
+    choice1: 'z',
+    choice2: 'x',
+    choice3: 'y',
+    choice4: 'x & y',
     answer: 3
   },
   {
-    question: 'Question 4',
-    choice1: 'Answer A',
-    choice2: 'Answer B',
-    choice3: 'Answer C',
-    choice4: 'Answer D',
+    question: 'Assuming each tile is one space, which of the following paths will get Charlie to the next goal? Be sure to take direction of travel into consideration.',
+    choice1: 'X + 6 spaces, then Y + 4 spaces',
+    choice2: 'X - 6 spaces, then Y + 4 spaces',
+    choice3: 'X - 6 spaces, then Y - 4 spaces',
+    choice4: 'X + 6 spaces, then Y - 6 spaces',
+    answer: 1
+  },
+  {
+    question: 'To take the road to the city instead of the road to the park, what should the first step be?',
+    choice1: 'Increase Y position',
+    choice2: 'Decrease Y position',
+    choice3: 'Decrease X position',
+    choice4: 'Increase X position',
     answer: 4
   },
   {
-    question: 'Question 5',
-    choice1: 'Answer 1',
-    choice2: 'Answer 2',
-    choice3: 'Answer 3',
-    choice4: 'Answer 4',
+    question: 'Assuming each tile is one space, which of the following paths will get Charlie to her goal?',
+    choice1: 'X + 2 spaces, then Y - 4 spaces',
+    choice2: 'X + 2 spaces, then Y + 2 spaces',
+    choice3: 'X - 2 spaces, then Y + 4 spaces',
+    choice4: 'X - 2 spaces, then Y - 4 spaces',
     answer: 1
   }
 ]
