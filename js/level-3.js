@@ -180,7 +180,7 @@ function moveCharacter(i, path) {
     oneStep(paths[path][i]);
     drawMaze();
     drawBridge();
-    drawCharacter()
+    drawCharacter();
   }, 150 * i);
 }
 
