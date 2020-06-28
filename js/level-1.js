@@ -18,8 +18,7 @@ var ctx = canvas.getContext("2d");
 var body = document.querySelector("body");
 
 var boxSize = canvas.width / 20;
-var questionVisibility = document.querySelector("#question");
-var answerVisibility = document.getElementsByClassName(".answer");
+var gameInterval;
 
 var state = {
   playerX: boxSize * 15,
@@ -37,7 +36,8 @@ var state = {
   ],
   targetPositionIndex: 0,
   questionMode: false,
-  gameComplete: false,
+  introductionMode: true,
+  endMode: false,
 }
 
 var maze = [
@@ -59,19 +59,16 @@ var maze = [
 ];
 
 function clearCanvas() {
-  canvas.removeEventListener("click", handleClick);
-  ctx.fillStyle="white";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="white";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
 }
 
 function handleClick() {
-  var gameInterval = setInterval(runGame,10);
-  if (state.gameComplete === false) {
-    console.log('game active');
-  } else {
-    console.log('loop over')
-    clearInterval(gameInterval);
-    window.location.assign("../level-2.html");
+  if (state.introductionMode === true) {
+    state.introductionMode = false;
+    gameInterval = setInterval(runGame,10);
+  } else if (state.endMode === true) {
+    window.location.assign("./level-2.html");
   }
 }
 
@@ -158,9 +155,6 @@ function updateTarget() {
   state.playerTargetY = newTargetPosition.y;
 }
 
-
-
-
 function runGame() {
   clearCanvas();
   drawMaze();
@@ -232,7 +226,8 @@ function getNextQuestion() {
       choice.style.visibility="visible";
     });
   } else {
-    state.gameComplete = true;
+    state.endMode = true;
+    clearInterval(gameInterval);
     drawCompleteScreen();
   }
 }
@@ -252,7 +247,6 @@ choices.forEach(function (choice, index) {
 })
 
 function drawCompleteScreen() {
-  state.gameComplete = true;
   ctx.fillStyle = "#000";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.font = "30px VT323";
