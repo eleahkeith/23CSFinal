@@ -140,7 +140,7 @@ canvas {
   visibility: hidden;
 }
 
-/* MAIN CONTENT - GAME COMPLETE PAGE */
+/* MAIN CONTENT - INDEX & GAME COMPLETE PAGE */
 main {
   margin: auto;
   flex-direction: column;
@@ -151,7 +151,7 @@ main {
 
 img {
   margin: .5rem 0 .25rem;
-  height: 20vh;
+  height: 18vh;
   max-height: 150px;
   width: auto;
   max-width: 144px;
@@ -159,14 +159,14 @@ img {
 
 main p {
   margin: .5rem 1rem;
-  font-size: 1.25em;
+  font-size: 1.15em;
   line-height: 1.15;
   text-align: center;
 }
 
 /* BUTTON - LINK */
 .button {
-  margin: 2rem 0 0;
+  margin: 1rem 0 1rem;
   padding: .5rem 1rem;
   background: #59EA59;
   color: #000;
@@ -221,6 +221,7 @@ footer {
 
   main p {
     font-size: 1.5em;
+    max-width: 80vw;
   }
 }
 
