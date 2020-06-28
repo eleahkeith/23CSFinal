@@ -18,7 +18,8 @@ var ctx = canvas.getContext("2d");
 var body = document.querySelector("body");
 
 var boxSize = canvas.width / 20;
-var quizVisibility = document.querySelector(".quiz");
+var questionVisibility = document.querySelector("#question");
+var answerVisibility = document.querySelectorAll(".answer");
 
 var state = {
   playerX: boxSize * 15,
@@ -83,7 +84,6 @@ function drawStartScreen() {
   ctx.textAlign = "center";
   ctx.fillText("Level 1", canvas.width/2, canvas.height * .4 );
   ctx.fillText("Touch To Start", canvas.width/2, canvas.height * .6);
-  quizVisibility.style.visibility="hidden";
 }
 
 function drawMaze() {
@@ -221,7 +221,7 @@ function getNextQuestion() {
   state.playerX = state.playerTargetX;
   state.playerY = state.playerTargetY;
   state.questionMode = true;
-  quizVisibility.style.visibility="visible";
+  document.querySelector("#question").style.visibility="visible";
   if (questionIndex < questions.length - 1) {
     questionIndex++;
     var currentQuestion = questions[questionIndex];

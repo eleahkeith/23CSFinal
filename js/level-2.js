@@ -1,3 +1,4 @@
+
 var canvas = document.querySelector("#screen")
 canvas.width = canvas.offsetWidth;
 canvas.height = canvas.offsetHeight;
@@ -8,7 +9,7 @@ const boxSize = canvas.width / 20;
 var state = {
   question: 1,
   character: { x: boxSize * 15, y: boxSize * 14, interval: 200 },
-  question1: { x: boxSize * 17, y: boxSize * 10, question: "Question 1", answers: ["1", "2", "3", "4"], correct: "answer2" },
+  question1: { x: boxSize * 15, y: boxSize * 14, question: "Question 1", answers: ["1", "2", "3", "4"], correct: "answer2" },
   question2: { x: boxSize * 18, y: boxSize * 2, question: "Question 2", answers: ["1", "2", "3", "4"], correct: "answer1" },
   question3: { x: boxSize * 15, y: boxSize * 5, question: "Question 3", answers: ["1", "2", "3", "4"], correct: "answer4" },
   question4: { x: boxSize * 12, y: boxSize * 10, question: "Question 4", answers: ["1", "2", "3", "4"], correct: "answer1" },
@@ -18,14 +19,27 @@ var state = {
   question8: { x: boxSize * 2, y: boxSize * 2, question: "Question 8", answers: ["1", "2", "3", "4"], correct: "answer4" },
 }
 
-// Run game
+// Start screen
+function drawStartScreen() {
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.font = "30px VT323";
+  ctx.fillStyle = "#59EA59";
+  ctx.textAlign = "center";
+  ctx.fillText("Level 2", canvas.width/2, canvas.height * .4 );
+  ctx.fillText("Touch To Start", canvas.width/2, canvas.height * .6);
+  canvas.addEventListener("click", startGame);
+}
+
+function startGame(){
+  setInterval(runGame, 100);
+}
+
 function runGame() {
   drawMaze();
   drawCharacter();
   setQuestionText(getQuestion());
 }
-
-setInterval(runGame, 50);
 
 // Maze
 var maze = [
@@ -119,14 +133,6 @@ async function moveRight(count) {
   }
 }
 
-async function correctAnswer() {
-  await moveUp(1);
-  await moveRight(3);
-  await moveUp(2);
-  await moveLeft(1);
-  await moveUp(1);
-}
-
 // Questions and anwsers
 function setQuestionText(question) {
   let questionText = document.getElementById("question");
@@ -140,6 +146,12 @@ function setQuestionText(question) {
   answer2.innerText = question.answers[1];
   answer3.innerText = question.answers[2];
   answer4.innerText = question.answers[3];
+
+  questionText.style.visibility = "visible";
+  answer1.style.visibility = "visible";
+  answer2.style.visibility = "visible";
+  answer3.style.visibility = "visible";
+  answer4.style.visibility = "visible";
 }
 
 function getQuestion() {
@@ -173,6 +185,7 @@ function getQuestion() {
   }
 }
 
+
 // User interaction
 function answerQuestion(e) {
   if (e.target.id.startsWith("answer")) {
@@ -191,3 +204,50 @@ function answerQuestion(e) {
 }
 
 addEventListener("click", answerQuestion);
+
+async function correctAnswer() {
+  if (state.question === 2) {
+    await moveUp(1);
+    await moveRight(3);
+    await moveUp(2);
+    await moveLeft(1);
+    await moveUp(1);
+  }
+  else if (state.question === 3) {
+    await moveUp(1);
+    await moveRight(1);
+    await moveUp(7);
+  }
+  else if (state.question === 4) {
+    await moveLeft(3);
+    await moveUp(1);
+    await moveLeft(2);
+    await moveDown(4);
+  }
+  else if (state.question === 5) {
+    await moveLeft(1);
+    await moveDown(2);
+    await moveLeft(1);
+    await moveDown(3);
+    await moveLeft(1);
+  }
+  else if (state.question === 6) {
+    await moveLeft(1);
+    await moveUp(2);
+    await moveLeft(2);
+    await moveDown(3);
+    await moveLeft(3);
+    await moveDown(2);
+    await moveLeft(2);
+  }
+  else if (state.question === 7) {
+    await moveLeft(1);
+    await moveUp(4);
+    await moveRight(2);
+    await moveUp(1);
+  }
+  else if (state.question === 8) {
+    await moveUp(5);
+    await moveRight(1);
+  }
+}
