@@ -26,9 +26,17 @@ var state = {
   playerTargetX: boxSize * 13,
   playerTargetY: boxSize * 1,
   playerSpeed: 1,
-  targetPositions: [{x: boxSize * 13, y: boxSize * 1}, {x: boxSize * 2, y: boxSize * 1}, {x: boxSize * 2, y: boxSize * 9}, {x: boxSize * 8, y: boxSize * 13}, {x: boxSize * 17, y: boxSize * 10}],
+  targetPositions: [
+    {x: boxSize * 13, y: boxSize * 1},
+    {x: boxSize * 2, y: boxSize * 1},
+    {x: boxSize * 2, y: boxSize * 9},
+    {x: boxSize * 8, y: boxSize * 13},
+    {x: boxSize * 17, y: boxSize * 10},
+    {x: boxSize * 19, y: boxSize * 6}
+  ],
   targetPositionIndex: 0,
-  questionMode: false
+  questionMode: false,
+  gameComplete: false,
 }
 
 var maze = [
@@ -50,8 +58,32 @@ var maze = [
 ];
 
 function clearCanvas() {
+  canvas.removeEventListener("click", handleClick);
   ctx.fillStyle="white";
   ctx.fillRect(0,0,canvas.width,canvas.height);
+}
+
+function handleClick() {
+  var gameInterval = setInterval(runGame,10);
+  if (state.gameComplete === false) {
+    console.log('game active');
+  } else {
+    console.log('loop over')
+    clearInterval(gameInterval);
+    window.location.assign("../level-2.html");
+  }
+}
+
+function drawStartScreen() {
+  canvas.addEventListener("click",handleClick);
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.font = "30px VT323";
+  ctx.fillStyle = "#59EA59";
+  ctx.textAlign = "center";
+  ctx.fillText("Level 1", canvas.width/2, canvas.height * .4 );
+  ctx.fillText("Touch To Start", canvas.width/2, canvas.height * .6);
+  quizVisibility.style.visibility="hidden";
 }
 
 function drawMaze() {
@@ -104,15 +136,12 @@ function masterPath() {
     var movePlayerRight = state.playerSpeed;
     var distanceFromTargetX = Math.abs(state.playerX - state.playerTargetX);
     var distanceFromTargetY = Math.abs(state.playerY - state.playerTargetY);
-    quizVisibility.style.visibility="hidden";
     if (distanceFromTargetX <= 1 && distanceFromTargetY <= 1) {
       getNextQuestion();
     } else if (isMovingLeft) {
       state.playerX += movePlayerLeft;
-      console.log(state.playerX);
     } else if (isMovingRight) {
       state.playerX += movePlayerRight;
-      console.log(state.playerX);
     } else if (isMovingUp) {
       state.playerY += movePlayerUp;
     } else if (isMovingDown) {
@@ -137,6 +166,7 @@ function runGame() {
   drawMaze();
   drawPlayer();
   masterPath();
+  console.log('running');
 }
 
 var question = document.querySelector("#question");
@@ -192,14 +222,18 @@ function getNextQuestion() {
   state.playerY = state.playerTargetY;
   state.questionMode = true;
   quizVisibility.style.visibility="visible";
-  questionIndex++;
-  var currentQuestion = questions[questionIndex];
-  question.innerText = currentQuestion.question;
-
-  choices.forEach(function (choice, index) {
-    choice.innerText = currentQuestion[`choice${index + 1}`];
-  });
-
+  if (questionIndex < questions.length - 1) {
+    questionIndex++;
+    var currentQuestion = questions[questionIndex];
+    question.innerText = currentQuestion.question;
+    choices.forEach(function (choice, index) {
+      choice.innerText = currentQuestion[`choice${index + 1}`];
+      choice.style.color="#000";
+    });
+  } else {
+    state.gameComplete = true;
+    drawCompleteScreen();
+  }
 }
 
 choices.forEach(function (choice, index) {
@@ -207,11 +241,26 @@ choices.forEach(function (choice, index) {
     var currentQuestion = questions[questionIndex];
     var isCorrect = currentQuestion.answer === index + 1;
     if (isCorrect) {
-      alert("great job");
+      choice.style.color="#59EA59";
       state.questionMode = false;
       updateTarget();
+    } else {
+      choice.style.color="#FF0000";
     }
   })
 })
 
-setInterval(runGame,20);
+function drawCompleteScreen() {
+  state.gameComplete = true;
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.font = "30px VT323";
+  ctx.fillStyle = "#59EA59";
+  ctx.textAlign = "center";
+  ctx.fillText("Congratulations!", canvas.width/2, canvas.height * .3 );
+  ctx.fillText("Level 1 Completed", canvas.width/2, canvas.height * .5 );
+  ctx.fillText("Touch To Continue", canvas.width/2, canvas.height * .7);
+  console.log("complete screen");
+}
+
+drawStartScreen();
