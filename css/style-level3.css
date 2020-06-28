@@ -123,6 +123,7 @@ canvas {
   border: 1px solid black;
   font-size: 1rem;
   font-weight: bold;
+  visibility: hidden;
 }
 
 /* QUIZ - ANSWERS */
@@ -136,6 +137,7 @@ canvas {
   text-align: left;
   font-size: 1rem;
   cursor: pointer;
+  visibility: hidden;
 }
 
 /* MAIN CONTENT - GAME COMPLETE PAGE */
