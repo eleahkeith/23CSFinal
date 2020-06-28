@@ -19,7 +19,7 @@ var body = document.querySelector("body");
 
 var boxSize = canvas.width / 20;
 var questionVisibility = document.querySelector("#question");
-var answerVisibility = document.querySelectorAll(".answer");
+var answerVisibility = document.getElementsByClassName(".answer");
 
 var state = {
   playerX: boxSize * 15,
@@ -229,6 +229,7 @@ function getNextQuestion() {
     choices.forEach(function (choice, index) {
       choice.innerText = currentQuestion[`choice${index + 1}`];
       choice.style.color="#000";
+      choice.style.visibility="visible";
     });
   } else {
     state.gameComplete = true;
