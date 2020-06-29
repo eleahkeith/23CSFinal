@@ -20,7 +20,7 @@ var state = {
 }
 
 // CANVAS & MAZE
-const canvas = document.querySelector("#screen")
+const canvas = document.querySelector("#screen");
 canvas.width = canvas.offsetWidth;
 canvas.height = canvas.offsetHeight;
 const ctx = canvas.getContext("2d");
@@ -50,7 +50,7 @@ const maze = [
   [4,0,0,1,4,0,4,0,0,4,0,4,0,3,0,4,0,0,3,3],
   [4,0,4,0,4,0,4,4,4,1,0,4,1,0,0,3,3,0,0,0],
   [4,0,4,0,4,0,3,0,0,0,3,3,0,4,0,0,0,0,3,0],
-  [4,1,4,0,0,1,4,4,4,0,0,0,0,3,3,3,3,0,3,3]
+  [4,1,4,0,0,1,4,4,4,0,0,0,0,3,3,3,3,0,3,3],
 ]
 
 function drawMaze() {
@@ -93,8 +93,6 @@ function drawBridge() {
       var y = 3;
     }
   }
-  ctx.fillStyle = "#3374FF";
-  ctx.fillRect (x * boxSize, y * boxSize, boxSize, boxSize);
   ctx.drawImage(bridgeimage, x * boxSize, y * boxSize, boxSize, boxSize);
 }
 
@@ -153,21 +151,26 @@ const paths = {
   path10b11: ["right","down","down","right"],
 }
 
+function getPath() {
+  var path = "path" + state.questionNumber;
+  if ([1, 4, 9].includes(state.questionNumber)) {
+    path += (state.questionNumber + 1);
+  } else if ([2, 5].includes(state.questionNumber)) {
+    path += (state.questionNumber + 1) + state.pathBranch;
+  } else if ([3, 10].includes(state.questionNumber)) {
+    path += state.pathBranch + (state.questionNumber + 1);
+  } else {
+    path += state.pathBranch + (state.questionNumber + 1) + state.pathBranch;
+  }
+  return path;
+}
+
 function updateCanvas() {
   if (state.questionNumber === 8) {
     drawBridge();
     state.nextQuestionDelay = 1;
   } else {
-    var path = "path" + state.questionNumber
-    if ([1, 4, 9].includes(state.questionNumber)) {
-      path += (state.questionNumber + 1);
-    } else if ([2, 5].includes(state.questionNumber)) {
-      path += (state.questionNumber + 1) + state.pathBranch;
-    } else if ([3, 10].includes(state.questionNumber)) {
-      path += state.pathBranch + (state.questionNumber + 1);
-    } else {
-      path += state.pathBranch + (state.questionNumber + 1) + state.pathBranch;
-    }
+    var path = getPath();
     for (var i = 0; i < paths[path].length; i++) {
       moveCharacter(i, path);
     }
@@ -339,22 +342,20 @@ function handleAnswerClick(e) {
   } else if (e.target.id === "answer4") {
     var a = "a4";
   }
-  if (state.questionNumber === 2) {
-    state.pathBranch = quiz[question][a][2];
-  } else if (state.questionNumber === 5) {
-    state.pathBranch = quiz[question][a][2];
-  }
   var answerTrue = quiz[question][a][1];
   if (state.quizMode === "started" && answerTrue === true) {
     for (var i = 0; i < 4; i++) {
       answerBoxes[i].removeEventListener("click", handleAnswerClick);
     }
     e.target.style.color = "#59EA59";
+    if (state.questionNumber === 2 || state.questionNumber === 5) {
+      state.pathBranch = quiz[question][a][2];
+    }
     updateCanvas();
     if (state.questionNumber === 10) {
       state.quizMode = "completed";
-      setTimeout(drawLevelCompleteScreen, 150 * state.nextQuestionDelay);
-      setTimeout(function() {quizVisibility("hidden")}, 150 * state.nextQuestionDelay);
+      setTimeout(function() {drawLevelCompleteScreen();
+        quizVisibility("hidden");}, 150 * state.nextQuestionDelay);
     } else {
       setTimeout(nextQuestion, 150 * state.nextQuestionDelay);
     }
