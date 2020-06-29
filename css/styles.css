@@ -103,7 +103,7 @@ ul.container.burger-open {
 
 /* CANVAS */
 canvas {
-  margin: .25rem auto 0;
+  margin: 1.25% auto 0;
   box-sizing: border-box;
   width: 95%;
   max-width: 500px;
