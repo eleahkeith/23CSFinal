@@ -1,3 +1,6 @@
+console.log(`Hmm... Well done, you know how to open the console.
+Surely someone this clever won't try to use it to cheat though, right?`);
+
 // BURGER MENU
 const navItems = document.querySelector("nav ul");
 const burgerIcon = document.querySelector(".burger-icon");
