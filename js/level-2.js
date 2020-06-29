@@ -9,14 +9,14 @@ const boxSize = canvas.width / 20;
 var state = {
   question: 1,
   character: { x: boxSize * 15, y: boxSize * 14, interval: 200 },
-  question1: { x: boxSize * 15, y: boxSize * 14, question: "Question 1", answers: ["1", "2", "3", "4"], correct: "answer2" },
-  question2: { x: boxSize * 18, y: boxSize * 2, question: "Question 2", answers: ["1", "2", "3", "4"], correct: "answer1" },
-  question3: { x: boxSize * 15, y: boxSize * 5, question: "Question 3", answers: ["1", "2", "3", "4"], correct: "answer4" },
-  question4: { x: boxSize * 12, y: boxSize * 10, question: "Question 4", answers: ["1", "2", "3", "4"], correct: "answer1" },
-  question5: { x: boxSize * 2, y: boxSize * 13, question: "Question 5", answers: ["1", "2", "3", "4"], correct: "answer3" },
-  question6: { x: boxSize * 3, y: boxSize * 8, question: "Question 6", answers: ["1", "2", "3", "4"], correct: "answer3" },
-  question7: { x: boxSize * 4, y: boxSize * 3, question: "Question 7", answers: ["1", "2", "3", "4"], correct: "answer2" },
-  question8: { x: boxSize * 2, y: boxSize * 2, question: "Question 8", answers: ["1", "2", "3", "4"], correct: "answer4" },
+  question1: { question: "Question 1", answers: ["1", "2", "3", "4"], correct: "answer2" },
+  question2: { question: "Question 2", answers: ["1", "2", "3", "4"], correct: "answer1" },
+  question3: { question: "Question 3", answers: ["1", "2", "3", "4"], correct: "answer4" },
+  question4: { question: "Question 4", answers: ["1", "2", "3", "4"], correct: "answer1" },
+  question5: { question: "Question 5", answers: ["1", "2", "3", "4"], correct: "answer3" },
+  question6: { question: "Question 6", answers: ["1", "2", "3", "4"], correct: "answer3" },
+  question7: { question: "Question 7", answers: ["1", "2", "3", "4"], correct: "answer2" },
+  question8: { question: "Question 8", answers: ["1", "2", "3", "4"], correct: "answer4" },
 }
 
 // Start screen
@@ -185,19 +185,24 @@ function getQuestion() {
   }
 }
 
-
 // User interaction
 function answerQuestion(e) {
   if (e.target.id.startsWith("answer")) {
     let question = getQuestion();
+
     if (e.target.id === question.correct) {
       state.question++;
       correctAnswer();
-      e.target.style.borderColor = "green";
+      e.target.style.color = "green";
       console.log("correct");
+      if (state.question === 9 && e.target.id === state.question8.correct) {
+        finish();
+      }
+
     }
+
     else {
-      e.target.style.borderColor = "red";
+      e.target.style.color = "red";
       console.log("wrong");
     }
   }
@@ -250,4 +255,10 @@ async function correctAnswer() {
     await moveUp(5);
     await moveRight(1);
   }
+}
+
+async function finish() {
+  await moveUp(2);
+  await moveLeft(3);
+  await moveUp(1);
 }
