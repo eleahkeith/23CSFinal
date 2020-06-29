@@ -284,7 +284,7 @@ async function finish() {
   complete();
 }
 
-function drawLevelCompleteScreen() {
+function drawLevelCompleteScreen(e) {
   ctx.fillStyle = "#000";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.font = "30px VT323";
@@ -293,12 +293,13 @@ function drawLevelCompleteScreen() {
   ctx.fillText("Congratulations!", canvas.width / 2, canvas.height * .3);
   ctx.fillText("Level 2 Completed", canvas.width / 2, canvas.height * .5);
   ctx.fillText("Touch To Continue", canvas.width / 2, canvas.height * .7);
-  canvas.addEventListener("click", level3())
 }
+
 
 function complete() {
   clearInterval(start);
   drawLevelCompleteScreen();
+  addEventListener("click", level3);
 }
 
 function level3() {
