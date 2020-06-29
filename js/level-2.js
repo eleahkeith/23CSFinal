@@ -173,7 +173,7 @@ function answerQuestion(e) {
   if (e.target.id.startsWith("answer")) {
     let question = getQuestion();
     if (e.target.id === question.correct) {
-      e.target.style.color = "green";
+      e.target.style.color = "#59EA59";
       state.question++;
       correctAnswer();
       console.log("correct");
@@ -183,7 +183,7 @@ function answerQuestion(e) {
       }
     }
     else {
-      e.target.style.color = "red";
+      e.target.style.color = "#FF0000";
       console.log("wrong");
     }
   }
