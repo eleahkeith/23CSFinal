@@ -20,14 +20,30 @@ const characterimage = document.querySelector("#characterimage");
 var state = {
   question: 1,
   character: { x: boxSize * 15, y: boxSize * 14, interval: 200 },
-  question1: { question: "This is Question 1", answers: ["One", "Two", "Three", "Four"], correct: "answer2" },
-  question2: { question: "This is Question 2", answers: ["1", "2", "3", "4"], correct: "answer1" },
-  question3: { question: "This is Question 3", answers: ["1", "2", "3", "4"], correct: "answer4" },
-  question4: { question: "This is Question 4", answers: ["1", "2", "3", "4"], correct: "answer1" },
-  question5: { question: "This is Question 5", answers: ["1", "2", "3", "4"], correct: "answer3" },
-  question6: { question: "This is Question 6", answers: ["1", "2", "3", "4"], correct: "answer3" },
-  question7: { question: "This is Question 7", answers: ["1", "2", "3", "4"], correct: "answer2" },
-  question8: { question: "This is Question 8", answers: ["1", "2", "3", "4"], correct: "answer4" },
+  question1: { question: "Which of these would have the output Hello World!?", 
+                answers: ["One", "console.log(Hello World!);", "Three", "Four"], 
+                correct: "answer2" },
+  question2: { question: "Which is the correct syntax when assigning a variable?", 
+                answers: ["var =", "2", "3", "4"], 
+                correct: "answer1" },
+  question3: { question: "What is a for loop?", 
+                answers: ["1", "2", "3", "For loops allow us to do a repetitive action and reduces the amount of code we have to write."], 
+                correct: "answer4" },
+  question4: { question: "Which of these is a for loop?", 
+                answers: [" for (let i = 0; i < count; i++) {}", "2", "3", "4"], 
+                correct: "answer1" },
+  question5: { question: "Charlie is a JavaScript object. What is an object in Javascript?", 
+                answers: ["1", "2", "An object is", "4"],   
+                correct: "answer3" },
+  question6: { question: "What does setInterval() do? ", 
+                answers: ["1", "2", "It calls a function or evaluates an expression at specified intervals (in milliseconds)", "4"], 
+                correct: "answer3" },
+  question7: { question: "What is the correct syntax to write a JavaScript function?", 
+                answers: ["1", "function moveCharlie() { }", "3", "4"], 
+                correct: "answer2" },
+  question8: { question: "Which function will get Charlie to the trophy?", 
+                answers: ["1", "2", "3", "function moveCharlie() { }"], 
+                correct: "answer4" },
 }
 
 // Start screen
@@ -41,7 +57,7 @@ function drawStartScreen() {
   ctx.fillText("Touch To Start", canvas.width / 2, canvas.height * .6);
   canvas.addEventListener("click", startGame);
 }
-var start;
+
 function startGame() {
   start = setInterval(runGame, 100);
 }
@@ -173,17 +189,17 @@ function answerQuestion(e) {
   if (e.target.id.startsWith("answer")) {
     let question = getQuestion();
     if (e.target.id === question.correct) {
-      e.target.style.color = "#59EA59";
+      // e.target.style.color = "#59EA59";
       state.question++;
       correctAnswer();
       console.log("correct");
-      setTimeout(resetAnswer, 2000);
+      // setTimeout(resetAnswer, 2000);
       if (state.question === 9 && e.target.id === state.question8.correct) {
         finish();
       }
     }
     else {
-      e.target.style.color = "#FF0000";
+      // e.target.style.color = "#FF0000";
       console.log("wrong");
     }
   }
@@ -191,12 +207,12 @@ function answerQuestion(e) {
 
 addEventListener("click", answerQuestion);
 
-function resetAnswer() {
-  answer1.style.color = "black";
-  answer2.style.color = "black";
-  answer3.style.color = "black";
-  answer4.style.color = "black";
-}
+// function resetAnswer() {
+//   answer1.style.color = "black";
+//   answer2.style.color = "black";
+//   answer3.style.color = "black";
+//   answer4.style.color = "black";
+// }
 
 function getQuestion() {
   switch (state.question) {
@@ -225,7 +241,7 @@ function getQuestion() {
       return state.question8;
       break;
     default:
-      return state.question1;
+      return state.question8;
   }
 }
 
@@ -294,7 +310,6 @@ function drawLevelCompleteScreen(e) {
   ctx.fillText("Level 2 Completed", canvas.width / 2, canvas.height * .5);
   ctx.fillText("Touch To Continue", canvas.width / 2, canvas.height * .7);
 }
-
 
 function complete() {
   clearInterval(start);
