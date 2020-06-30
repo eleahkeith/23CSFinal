@@ -35,6 +35,8 @@ const cityimage = document.querySelector("#cityimage");
 const trophyimage = document.querySelector("#trophyimage");
 const bridgeimage = document.querySelector("#bridgeimage");
 const characterimage = document.querySelector("#characterimage");
+const waterimage = document.querySelector("#waterimage");
+const grassimage = document.querySelector("#grassimage");
 
 const boxSize = canvas.width/20;
 
@@ -71,11 +73,12 @@ function drawMaze() {
       if (maze[y][x] === 1) {
         ctx.drawImage(starimage, x * boxSize, y * boxSize, boxSize, boxSize);
       } else if (maze[y][x] === 2) {
-        ctx.fillStyle = "#3374FF";
-        ctx.fillRect (x * boxSize, y * boxSize, boxSize, boxSize);
+        ctx.drawImage(waterimage, x * boxSize, y * boxSize, boxSize, boxSize);
       } else if (maze[y][x] === 3) {
+        ctx.drawImage(grassimage, x * boxSize, y * boxSize, boxSize, boxSize);
         ctx.drawImage(treeimage, x * boxSize, y * boxSize, boxSize, boxSize);
       } else if (maze[y][x] === 4) {
+        ctx.drawImage(grassimage, x * boxSize, y * boxSize, boxSize, boxSize);
         ctx.drawImage(houseimage, x * boxSize, y * boxSize, boxSize, boxSize);
       } else if (maze[y][x] === 5) {
         ctx.drawImage(cityimage, x * boxSize, y * boxSize, boxSize, boxSize);

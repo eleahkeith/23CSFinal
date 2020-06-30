@@ -152,9 +152,9 @@ main {
 img {
   margin: .5rem 0 .25rem;
   height: 18vh;
-  max-height: 150px;
+  max-height: 200px;
   width: auto;
-  max-width: 144px;
+  max-width: 200px;
 }
 
 main p {
