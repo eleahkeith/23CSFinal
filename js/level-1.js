@@ -98,8 +98,8 @@ function drawMaze() {
         ctx.drawImage(starimage, x * boxSize, y * boxSize, boxSize, boxSize);
       }
       if (maze[y][x] === 2) {
-        ctx.fillStyle="#3374FF";
-        ctx.fillRect (x*boxSize, y*boxSize, boxSize, boxSize);
+        // ctx.fillStyle="#3374FF";
+        ctx.drawImage (waterimage, x*boxSize, y*boxSize, boxSize, boxSize);
       }
       if (maze[y][x] === 3) {
         ctx.drawImage(treeimage, x*boxSize, y*boxSize, boxSize, boxSize);
