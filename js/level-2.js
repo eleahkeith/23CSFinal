@@ -21,7 +21,7 @@ var state = {
   question: 1,
   character: { x: boxSize * 15, y: boxSize * 14, interval: 120 },
   question1: {
-    question: "Which of these result in the output Hello World! on the console screen?",
+    question: "Which of these result in the output Hello World! on the console?",
     answers: ["console log Hello World!", "console.log(\"Hello World!\");", "console.log\"Hello World!\";", "console.log(Hello World!);"],
     correct: "answer2"
   },
@@ -31,33 +31,33 @@ var state = {
     correct: "answer1"
   },
   question3: {
-    question: "What is a for loop?",
-    answers: ["1", "2", "3", "For loops allow us to do a repetitive action reducing the amount of code we have to write."],
+    question: "How would we assign a value to a varaible",
+    answers: ["up = var direction;", "direction = var up;", "var = direction up; ", "var direction = 'up';"],
     correct: "answer4"
   },
   question4: {
-    question: "Which of these is a for loop?",
-    answers: [" for (let i = 0; i < count; i++) {}", "2", "3", "4"],
+    question: "What can we code to stop Charlie from walking into the buildings, houses, water or trees?",
+    answers: ["Collision detection", "for loop", "setInterval()", "An array"],
     correct: "answer1"
   },
   question5: {
-    question: "Charlie is a JavaScript object. What is an object in Javascript?",
-    answers: ["1", "2", "An object is", "4"],
+    question: "We can make it easier to give Charlie directions by writing functions. What is a function?",
+    answers: ["A function is a block of code that can only be used once", "A function is a type of for loop", "A function is a named block of code that we can use as many times as needed", "Functions are code that always return a value"],
     correct: "answer3"
   },
   question6: {
-    question: "What does setInterval() do? ",
-    answers: ["1", "2", "It calls a function or evaluates an expression at specified intervals (in milliseconds)", "4"],
+    question: "Which path will get Charlie to the next star?",
+    answers: ["X + 1 spaces, then Y + 4 spaces, then X + 2 spaces, then Y - 1 spaces", "X - 1 spaces, then Y - 4 spaces, then X - 2 spaces, then Y + 1 spaces", "'X - 1 spaces, then Y - 4 spaces, then X + 2 spaces, then Y - 1 spaces'", "'X - 1 spaces, then Y - 5 spaces, then X + 2 spaces, then Y - 1 spaces'"],
     correct: "answer3"
   },
   question7: {
     question: "What is the correct syntax to write a JavaScript function?",
-    answers: ["1", "function moveCharlie() { }", "3", "4"],
+    answers: ["function walk = steps + direction", "function walk(steps, direction) { }", "function = walk(steps, direction) { }", "walk(steps, direction) { } = function"],
     correct: "answer2"
   },
   question8: {
-    question: "Which function will get Charlie to the trophy?",
-    answers: ["1", "2", "3", "function moveCharlie() { }"],
+    question: "which answer will get Charlie to the trophy using the function walk(steps, direction)?",
+    answers: ["walk 1 up; walk 3 left; walk 1 up;", "walk(3, up); walk(3, left);", "walk(3, left); walk(3, up);", "walk(2, 'up'); walk(3, 'left'); walk(1, 'up');"],
     correct: "answer4"
   },
 }
