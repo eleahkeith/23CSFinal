@@ -20,30 +20,46 @@ const characterimage = document.querySelector("#characterimage");
 var state = {
   question: 1,
   character: { x: boxSize * 15, y: boxSize * 14, interval: 200 },
-  question1: { question: "Which of these would have the output Hello World!?", 
-                answers: ["One", "console.log(Hello World!);", "Three", "Four"], 
-                correct: "answer2" },
-  question2: { question: "Which is the correct syntax when assigning a variable?", 
-                answers: ["var =", "2", "3", "4"], 
-                correct: "answer1" },
-  question3: { question: "What is a for loop?", 
-                answers: ["1", "2", "3", "For loops allow us to do a repetitive action and reduces the amount of code we have to write."], 
-                correct: "answer4" },
-  question4: { question: "Which of these is a for loop?", 
-                answers: [" for (let i = 0; i < count; i++) {}", "2", "3", "4"], 
-                correct: "answer1" },
-  question5: { question: "Charlie is a JavaScript object. What is an object in Javascript?", 
-                answers: ["1", "2", "An object is", "4"],   
-                correct: "answer3" },
-  question6: { question: "What does setInterval() do? ", 
-                answers: ["1", "2", "It calls a function or evaluates an expression at specified intervals (in milliseconds)", "4"], 
-                correct: "answer3" },
-  question7: { question: "What is the correct syntax to write a JavaScript function?", 
-                answers: ["1", "function moveCharlie() { }", "3", "4"], 
-                correct: "answer2" },
-  question8: { question: "Which function will get Charlie to the trophy?", 
-                answers: ["1", "2", "3", "function moveCharlie() { }"], 
-                correct: "answer4" },
+  question1: {
+    question: "Which of these result in the output Hello World! on the console screen?",
+    answers: ["console log Hello World!", "console.log(\"Hello World!\");", "console.log\"Hello World!\";", "console.log(Hello World!);"],
+    correct: "answer2"
+  },
+  question2: {
+    question: "Which is true about variables?",
+    answers: ["A variable is used to store a value", "A variable can never be changed", "A variable can only be a number", "A variable can only be a string"],
+    correct: "answer1"
+  },
+  question3: {
+    question: "What is a for loop?",
+    answers: ["1", "2", "3", "For loops allow us to do a repetitive action reducing the amount of code we have to write."],
+    correct: "answer4"
+  },
+  question4: {
+    question: "Which of these is a for loop?",
+    answers: [" for (let i = 0; i < count; i++) {}", "2", "3", "4"],
+    correct: "answer1"
+  },
+  question5: {
+    question: "Charlie is a JavaScript object. What is an object in Javascript?",
+    answers: ["1", "2", "An object is", "4"],
+    correct: "answer3"
+  },
+  question6: {
+    question: "What does setInterval() do? ",
+    answers: ["1", "2", "It calls a function or evaluates an expression at specified intervals (in milliseconds)", "4"],
+    correct: "answer3"
+  },
+  question7: {
+    question: "What is the correct syntax to write a JavaScript function?",
+    answers: ["1", "function moveCharlie() { }", "3", "4"],
+    correct: "answer2"
+  },
+  question8: {
+    question: "Which function will get Charlie to the trophy?",
+    answers: ["1", "2", "3", "function moveCharlie() { }"],
+    correct: "answer4"
+  },
 }
 
 // Start screen
@@ -91,10 +107,8 @@ var maze = [
 function drawMaze() {
   ctx.fillStyle = "#fff";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  for (var y = 0; y < maze.length; y++) 
-  {
-    for (var x = 0; x < maze[y].length; x++) 
-    {
+  for (var y = 0; y < maze.length; y++) {
+    for (var x = 0; x < maze[y].length; x++) {
       if (maze[y][x] === 0 || maze[y][x] === 1 || maze[y][x] === 6) {
         ctx.fillStyle = "#BEBEBE";
         ctx.fillRect(x * boxSize, y * boxSize, boxSize, boxSize);
@@ -176,6 +190,7 @@ function setQuestionText(question) {
   answer2.innerText = question.answers[1];
   answer3.innerText = question.answers[2];
   answer4.innerText = question.answers[3];
+
   // Make Q&A visible after start screen
   questionText.style.visibility = "visible";
   answer1.style.visibility = "visible";
@@ -185,21 +200,21 @@ function setQuestionText(question) {
 }
 
 // User interaction
-function answerQuestion(e) {
+async function answerQuestion(e) {
   if (e.target.id.startsWith("answer")) {
     let question = getQuestion();
     if (e.target.id === question.correct) {
-      // e.target.style.color = "#59EA59";
+      e.target.style.color = "#59EA59";
+      await correctAnswer();
+      resetAnswer();
       state.question++;
-      correctAnswer();
       console.log("correct");
-      // setTimeout(resetAnswer, 2000);
       if (state.question === 9 && e.target.id === state.question8.correct) {
         finish();
       }
     }
     else {
-      // e.target.style.color = "#FF0000";
+      e.target.style.color = "#FF0000";
       console.log("wrong");
     }
   }
@@ -207,12 +222,12 @@ function answerQuestion(e) {
 
 addEventListener("click", answerQuestion);
 
-// function resetAnswer() {
-//   answer1.style.color = "black";
-//   answer2.style.color = "black";
-//   answer3.style.color = "black";
-//   answer4.style.color = "black";
-// }
+function resetAnswer() {
+  answer1.style.color = "black";
+  answer2.style.color = "black";
+  answer3.style.color = "black";
+  answer4.style.color = "black";
+}
 
 function getQuestion() {
   switch (state.question) {
@@ -246,32 +261,32 @@ function getQuestion() {
 }
 
 async function correctAnswer() {
-  if (state.question === 2) {
+  if (state.question === 1) {
     await moveUp(1);
     await moveRight(3);
     await moveUp(2);
     await moveLeft(1);
     await moveUp(1);
   }
-  else if (state.question === 3) {
+  else if (state.question === 2) {
     await moveUp(1);
     await moveRight(1);
     await moveUp(7);
   }
-  else if (state.question === 4) {
+  else if (state.question === 3) {
     await moveLeft(3);
     await moveUp(1);
     await moveLeft(2);
     await moveDown(4);
   }
-  else if (state.question === 5) {
+  else if (state.question === 4) {
     await moveLeft(1);
     await moveDown(2);
     await moveLeft(1);
     await moveDown(3);
     await moveLeft(1);
   }
-  else if (state.question === 6) {
+  else if (state.question === 5) {
     await moveLeft(1);
     await moveUp(2);
     await moveLeft(2);
@@ -280,13 +295,13 @@ async function correctAnswer() {
     await moveDown(2);
     await moveLeft(2);
   }
-  else if (state.question === 7) {
+  else if (state.question === 6) {
     await moveLeft(1);
     await moveUp(4);
     await moveRight(2);
     await moveUp(1);
   }
-  else if (state.question === 8) {
+  else if (state.question === 7) {
     await moveUp(5);
     await moveRight(1);
   }
