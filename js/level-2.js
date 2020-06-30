@@ -9,14 +9,17 @@ function toggleBurgerMenu(icon) {
 
 burgerIcon.addEventListener("click", function () { toggleBurgerMenu(this) });
 
+// Canvas
 var canvas = document.querySelector("#screen")
 canvas.width = canvas.offsetWidth;
 canvas.height = canvas.offsetHeight;
 var ctx = canvas.getContext("2d");
 
+// Constants
 const boxSize = canvas.width / 20;
 const characterimage = document.querySelector("#characterimage");
 
+// Objects
 var state = {
   question: 1,
   character: { x: boxSize * 15, y: boxSize * 14, interval: 120 },
@@ -74,14 +77,16 @@ function drawStartScreen() {
   canvas.addEventListener("click", startGame);
 }
 
-function startGame() {
-  start = setInterval(runGame, 100);
-}
-
-function runGame() {
-  drawMaze();
-  drawCharacter();
-  setQuestionText(getQuestion());
+// Level 2 complete screen
+function drawLevelCompleteScreen(e) {
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.font = "30px VT323";
+  ctx.fillStyle = "#59EA59";
+  ctx.textAlign = "center";
+  ctx.fillText("Congratulations!", canvas.width / 2, canvas.height * .3);
+  ctx.fillText("Level 2 Completed", canvas.width / 2, canvas.height * .5);
+  ctx.fillText("Touch To Continue", canvas.width / 2, canvas.height * .7);
 }
 
 // Maze
@@ -103,7 +108,6 @@ var maze = [
   [4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4],
 ]
 
-// Change var y to var mazeY and var x to var mazeX?
 function drawMaze() {
   ctx.fillStyle = "#fff";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -124,9 +128,11 @@ function drawMaze() {
         ctx.fillRect(x * boxSize, y * boxSize, boxSize, boxSize);
       }
       else if (maze[y][x] === 3) {
+        ctx.drawImage(grassimage, x * boxSize, y * boxSize, boxSize, boxSize);
         ctx.drawImage(treeimage, x * boxSize, y * boxSize, boxSize, boxSize);
       }
       else if (maze[y][x] === 4) {
+        ctx.drawImage(grassimage, x * boxSize, y * boxSize, boxSize, boxSize);
         ctx.drawImage(houseimage, x * boxSize, y * boxSize, boxSize, boxSize);
       }
       else if (maze[y][x] === 5) {
@@ -137,6 +143,17 @@ function drawMaze() {
       }
     }
   }
+}
+
+// Start and run game
+function startGame() {
+  start = setInterval(runGame, 100);
+}
+
+function runGame() {
+  drawMaze();
+  drawCharacter();
+  setQuestionText(getQuestion());
 }
 
 // Charactor and movement
@@ -177,7 +194,7 @@ async function moveRight(count) {
   }
 }
 
-// Questions and anwsers
+// Add questions and anwsers
 function setQuestionText(question) {
   let questionText = document.getElementById("question");
   let answer1 = document.getElementById("answer1");
@@ -191,7 +208,7 @@ function setQuestionText(question) {
   answer3.innerText = question.answers[2];
   answer4.innerText = question.answers[3];
 
-  // Make Q&A visible after start screen
+// Make Q&A visible after start screen
   questionText.style.visibility = "visible";
   answer1.style.visibility = "visible";
   answer2.style.visibility = "visible";
@@ -208,14 +225,12 @@ async function answerQuestion(e) {
       await correctAnswer();
       resetAnswer();
       state.question++;
-      console.log("correct");
       if (state.question === 9 && e.target.id === state.question8.correct) {
         finish();
       }
     }
     else {
       e.target.style.color = "#FF0000";
-      console.log("wrong");
     }
   }
 }
@@ -312,21 +327,10 @@ async function finish() {
   await moveUp(2);
   await moveLeft(3);
   await moveUp(1);
-  complete();
+  completed();
 }
 
-function drawLevelCompleteScreen(e) {
-  ctx.fillStyle = "#000";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.font = "30px VT323";
-  ctx.fillStyle = "#59EA59";
-  ctx.textAlign = "center";
-  ctx.fillText("Congratulations!", canvas.width / 2, canvas.height * .3);
-  ctx.fillText("Level 2 Completed", canvas.width / 2, canvas.height * .5);
-  ctx.fillText("Touch To Continue", canvas.width / 2, canvas.height * .7);
-}
-
-function complete() {
+function completed() {
   clearInterval(start);
   drawLevelCompleteScreen();
   addEventListener("click", level3);
