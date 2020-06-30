@@ -124,8 +124,7 @@ function drawMaze() {
         ctx.drawImage(starimage, x * boxSize, y * boxSize, boxSize, boxSize);
       }
       else if (maze[y][x] === 2) {
-        ctx.fillStyle = "blue";
-        ctx.fillRect(x * boxSize, y * boxSize, boxSize, boxSize);
+      ctx.drawImage(waterimage, x * boxSize, y * boxSize, boxSize, boxSize);
       }
       else if (maze[y][x] === 3) {
         ctx.drawImage(grassimage, x * boxSize, y * boxSize, boxSize, boxSize);
