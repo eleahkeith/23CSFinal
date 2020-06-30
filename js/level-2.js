@@ -19,7 +19,7 @@ const characterimage = document.querySelector("#characterimage");
 
 var state = {
   question: 1,
-  character: { x: boxSize * 15, y: boxSize * 14, interval: 200 },
+  character: { x: boxSize * 15, y: boxSize * 14, interval: 120 },
   question1: {
     question: "Which of these result in the output Hello World! on the console screen?",
     answers: ["console log Hello World!", "console.log(\"Hello World!\");", "console.log\"Hello World!\";", "console.log(Hello World!);"],
