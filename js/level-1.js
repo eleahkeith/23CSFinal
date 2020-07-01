@@ -9,7 +9,7 @@ function toggleBurgerMenu(icon) {
 
 burgerIcon.addEventListener("click", function(){toggleBurgerMenu(this)});
 
-
+// state and global variables
 var canvas = document.querySelector("#screen");
 canvas.width = canvas.offsetWidth;
 canvas.height = canvas.offsetHeight;
@@ -40,28 +40,7 @@ var state = {
   endMode: false,
 }
 
-var maze = [
-  [2,3,3,3,4,3,4,3,4,3,4,3,4,3,4,3,2,2,5,5],
-  [2,3,1,0,0,0,0,0,0,0,0,0,0,1,0,0,4,2,5,5],
-  [2,3,0,4,4,4,3,3,3,3,3,3,3,0,4,3,2,2,5,5],
-  [2,3,0,4,3,3,3,2,2,2,2,2,3,0,4,3,2,3,5,5],
-  [2,2,0,2,2,2,2,2,2,2,2,2,3,0,4,3,2,3,3,3],
-  [3,3,0,4,4,4,3,2,2,2,2,2,3,0,4,2,2,3,5,5],
-  [3,4,0,4,0,4,3,2,2,2,2,2,3,0,0,2,0,0,0,6],
-  [3,4,0,4,0,4,3,3,3,3,2,3,4,0,4,2,3,5,5,0],
-  [3,4,0,4,0,4,4,4,4,3,2,3,4,0,4,2,3,5,5,0],
-  [3,4,1,0,0,0,0,0,0,3,2,2,2,4,3,2,3,5,5,0],
-  [3,3,3,3,3,3,3,3,0,4,4,3,2,3,2,2,3,1,0,0],
-  [3,3,3,0,0,0,3,3,0,3,3,3,2,2,2,3,5,0,5,0],
-  [3,2,2,3,3,0,3,3,0,4,4,4,4,4,3,5,5,0,5,0],
-  [3,2,2,3,3,0,0,0,1,0,0,0,0,0,0,0,0,0,5,5],
-  [3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,5,5,5,5,5]
-];
-
-function clearCanvas() {
-    ctx.fillStyle="white";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-}
+// start screen & click function
 
 function handleClick() {
   if (state.introductionMode === true) {
@@ -82,6 +61,31 @@ function drawStartScreen() {
   ctx.fillText("Level 1", canvas.width/2, canvas.height * .4 );
   ctx.fillText("Touch To Start", canvas.width/2, canvas.height * .6);
 }
+
+// maze, character, and path
+
+function clearCanvas() {
+    ctx.fillStyle="white";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+}
+
+var maze = [
+  [2,3,3,3,4,3,4,3,4,3,4,3,4,3,4,3,2,2,5,5],
+  [2,3,1,0,0,0,0,0,0,0,0,0,0,1,0,0,4,2,5,5],
+  [2,3,0,4,4,4,3,3,3,3,3,3,3,0,4,3,2,2,5,5],
+  [2,3,0,4,3,3,3,2,2,2,2,2,3,0,4,3,2,3,5,5],
+  [2,2,0,2,2,2,2,2,2,2,2,2,3,0,4,3,2,3,3,3],
+  [3,3,0,4,4,4,3,2,2,2,2,2,3,0,4,2,2,3,5,5],
+  [3,4,0,4,0,4,3,2,2,2,2,2,3,0,0,2,0,0,0,6],
+  [3,4,0,4,0,4,3,3,3,3,2,3,4,0,4,2,3,5,5,0],
+  [3,4,0,4,0,4,4,4,4,3,2,3,4,0,4,2,3,5,5,0],
+  [3,4,1,0,0,0,0,0,0,3,2,2,2,4,3,2,3,5,5,0],
+  [3,3,3,3,3,3,3,3,0,4,4,3,2,3,2,2,3,1,0,0],
+  [3,3,3,0,0,0,3,3,0,3,3,3,2,2,2,3,5,0,5,0],
+  [3,2,2,3,3,0,3,3,0,4,4,4,4,4,3,5,5,0,5,0],
+  [3,2,2,3,3,0,0,0,1,0,0,0,0,0,0,0,0,0,5,5],
+  [3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,5,5,5,5,5]
+];
 
 function drawMaze() {
   for(var y = 0; y < maze.length; y++) {
@@ -157,12 +161,7 @@ function updateTarget() {
   state.playerTargetY = newTargetPosition.y;
 }
 
-function runGame() {
-  clearCanvas();
-  drawMaze();
-  drawPlayer();
-  masterPath();
-}
+// quiz
 
 var question = document.querySelector("#question");
 var choices = Array.from(document.querySelectorAll(".answer"));
@@ -247,6 +246,7 @@ choices.forEach(function (choice, index) {
   })
 })
 
+// complete screen
 function drawCompleteScreen() {
   ctx.fillStyle = "#000";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -256,6 +256,15 @@ function drawCompleteScreen() {
   ctx.fillText("Congratulations!", canvas.width/2, canvas.height * .3 );
   ctx.fillText("Level 1 Completed", canvas.width/2, canvas.height * .5 );
   ctx.fillText("Touch To Continue", canvas.width/2, canvas.height * .7);
+}
+
+// functions that run the game
+
+function runGame() {
+  clearCanvas();
+  drawMaze();
+  drawPlayer();
+  masterPath();
 }
 
 drawStartScreen();
