@@ -23,7 +23,7 @@ var gameInterval;
 var state = {
   playerX: boxSize * 15,
   playerY: boxSize * 1,
-  playerTargetX: boxSize * 13,
+  playerTargetX: Math.floor(boxSize * 13),
   playerTargetY: boxSize * 1,
   playerSpeed: 1,
   targetPositions: [
@@ -125,15 +125,15 @@ function drawPlayer() {
 
 function masterPath() {
   if (state.questionMode === false) {
-    var isMovingLeft = state.playerX > state.playerTargetX;
-    var isMovingUp = state.playerY > state.playerTargetY;
-    var isMovingRight = state.playerX < state.playerTargetX;
-    var isMovingDown = state.playerY < state.playerTargetY;
+    var isMovingLeft = Math.floor(state.playerX) > state.playerTargetX;
+    var isMovingUp = Math.floor(state.playerY) > state.playerTargetY;
+    var isMovingRight = Math.floor(state.playerX) < state.playerTargetX;
+    var isMovingDown = Math.floor(state.playerY) < state.playerTargetY;
     var movePlayerUp = state.playerSpeed * -1;
     var movePlayerLeft = state.playerSpeed * -1;
     var movePlayerDown = state.playerSpeed;
     var movePlayerRight = state.playerSpeed;
-    var distanceFromTargetX = Math.abs(state.playerX - state.playerTargetX);
+    var distanceFromTargetX = Math.abs(Math.floor(state.playerX) - Math.floor(state.playerTargetX));
     var distanceFromTargetY = Math.abs(state.playerY - state.playerTargetY);
     if (distanceFromTargetX <= 2 && distanceFromTargetY <= 2) {
       getNextQuestion();
@@ -147,6 +147,8 @@ function masterPath() {
       state.playerY += movePlayerDown;
     }
   }
+  console.log(state.playerX);
+  console.log(state.playerTargetX);
 }
 
 function updateTarget() {
