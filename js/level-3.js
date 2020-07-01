@@ -1,12 +1,12 @@
 var theBody = document.querySelector("body");
-theBody.style.background = "lightblue";
+theBody.style.background = "lightred";
 
 console.log(`Hmm... Well done, you know how to open the console.
 Surely someone this clever won't try to use it to cheat though, right?`);
 
 // BURGER MENU
-var navItems = document.querySelector("nav ul");
-var burgerIcon = document.querySelector(".burger-icon");
+const navItems = document.querySelector("nav ul");
+const burgerIcon = document.querySelector(".burger-icon");
 
 function toggleBurgerMenu(icon) {
   icon.classList.toggle("transform");
@@ -26,20 +26,20 @@ var state = {
 };
 
 // CANVAS & MAZE
-var canvas = document.querySelector("#screen");
+const canvas = document.querySelector("#screen");
 canvas.width = canvas.offsetWidth;
 canvas.height = canvas.offsetHeight;
-var ctx = canvas.getContext("2d");
+const ctx = canvas.getContext("2d");
 
-var starimage = document.querySelector("#starimage");
-var treeimage = document.querySelector("#treeimage");
-var houseimage = document.querySelector("#houseimage");
-var cityimage = document.querySelector("#cityimage");
-var trophyimage = document.querySelector("#trophyimage");
-var bridgeimage = document.querySelector("#bridgeimage");
-var characterimage = document.querySelector("#characterimage");
-var waterimage = document.querySelector("#waterimage");
-var grassimage = document.querySelector("#grassimage");
+const starimage = document.querySelector("#starimage");
+const treeimage = document.querySelector("#treeimage");
+const houseimage = document.querySelector("#houseimage");
+const cityimage = document.querySelector("#cityimage");
+const trophyimage = document.querySelector("#trophyimage");
+const bridgeimage = document.querySelector("#bridgeimage");
+const characterimage = document.querySelector("#characterimage");
+const waterimage = document.querySelector("#waterimage");
+const grassimage = document.querySelector("#grassimage");
 
 var boxSize = canvas.width/20;
 
@@ -111,8 +111,8 @@ function drawStartScreen() {
   ctx.font = "30px VT323";
   ctx.fillStyle = "#59EA59";
   ctx.textAlign = "center";
-  ctx.fillText("Level 3", canvas.width/2, canvas.height * .4 );
-  ctx.fillText("Touch To Start", canvas.width/2, canvas.height * .6);
+  ctx.fillText("Level 3", canvas.width/2, canvas.height * 0.4 );
+  ctx.fillText("Touch To Start", canvas.width/2, canvas.height * 0.6);
 }
 
 function drawLevelCompleteScreen() {
