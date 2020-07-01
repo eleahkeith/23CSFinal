@@ -27,12 +27,12 @@ var state = {
   playerTargetY: boxSize * 1,
   playerSpeed: 1,
   targetPositions: [
-    {x: boxSize * 13, y: boxSize * 1},
-    {x: boxSize * 2, y: boxSize * 1},
-    {x: boxSize * 2, y: boxSize * 9},
-    {x: boxSize * 8, y: boxSize * 13},
-    {x: boxSize * 17, y: boxSize * 10},
-    {x: boxSize * 19, y: boxSize * 6}
+    {x: Math.floor(boxSize * 13), y: boxSize * 1},
+    {x: Math.floor(boxSize * 2), y: boxSize * 1},
+    {x: Math.floor(boxSize * 2), y: boxSize * 9},
+    {x: Math.floor(boxSize * 8), y: boxSize * 13},
+    {x: Math.floor(boxSize * 17), y: boxSize * 10},
+    {x: Math.floor(boxSize * 19), y: boxSize * 6}
   ],
   targetPositionIndex: 0,
   questionMode: false,
@@ -125,9 +125,9 @@ function drawPlayer() {
 
 function masterPath() {
   if (state.questionMode === false) {
-    var isMovingLeft = Math.floor(state.playerX) > Math.floor(state.playerTargetX);
+    var isMovingLeft = state.playerX > state.playerTargetX;
     var isMovingUp = state.playerY > state.playerTargetY;
-    var isMovingRight = Math.floor(state.playerX) < Math.floor(state.playerTargetX);
+    var isMovingRight = state.playerX < state.playerTargetX;
     var isMovingDown = state.playerY < state.playerTargetY;
     var movePlayerUp = state.playerSpeed * -1;
     var movePlayerLeft = state.playerSpeed * -1;
@@ -147,7 +147,6 @@ function masterPath() {
       state.playerY += movePlayerDown;
     }
   }
-  console.log(state.playerX);
 }
 
 function updateTarget() {
@@ -163,7 +162,6 @@ function runGame() {
   drawMaze();
   drawPlayer();
   masterPath();
-  console.log('running');
 }
 
 var question = document.querySelector("#question");
@@ -262,4 +260,3 @@ function drawCompleteScreen() {
 }
 
 drawStartScreen();
-console.log('update');
