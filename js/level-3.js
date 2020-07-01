@@ -1,5 +1,5 @@
 var theBody = document.querySelector("body");
-theBody.style.background = "lightgreen";
+theBody.style.background = "pink";
 
 console.log(`Hmm... Well done, you know how to open the console.
 Surely someone this clever won't try to use it to cheat though, right?`);
@@ -32,14 +32,14 @@ canvas.height = canvas.offsetHeight;
 const ctx = canvas.getContext("2d");
 
 const starimg = document.querySelector("#starimage");
-var treeimage = document.querySelector("#treeimage");
-var houseimage = document.querySelector("#houseimage");
-var cityimage = document.querySelector("#cityimage");
-var trophyimage = document.querySelector("#trophyimage");
-var bridgeimage = document.querySelector("#bridgeimage");
-var characterimage = document.querySelector("#characterimage");
-var waterimage = document.querySelector("#waterimage");
-var grassimage = document.querySelector("#grassimage");
+const treeimg = document.querySelector("#treeimage");
+const houseimg = document.querySelector("#houseimage");
+const cityimg = document.querySelector("#cityimage");
+const trophyimg = document.querySelector("#trophyimage");
+const bridgeimg = document.querySelector("#bridgeimage");
+const characterimg = document.querySelector("#characterimage");
+const waterimg = document.querySelector("#waterimage");
+const grassimg = document.querySelector("#grassimage");
 
 const boxSize = canvas.width/20;
 
@@ -76,17 +76,17 @@ function drawMaze() {
       if (maze[y][x] === 1) {
         ctx.drawImage(starimg, x * boxSize, y * boxSize, boxSize, boxSize);
       } else if (maze[y][x] === 2) {
-        ctx.drawImage(waterimage, x * boxSize, y * boxSize, boxSize, boxSize);
+        ctx.drawImage(waterimg, x * boxSize, y * boxSize, boxSize, boxSize);
       } else if (maze[y][x] === 3) {
-        ctx.drawImage(grassimage, x * boxSize, y * boxSize, boxSize, boxSize);
-        ctx.drawImage(treeimage, x * boxSize, y * boxSize, boxSize, boxSize);
+        ctx.drawImage(grassimg, x * boxSize, y * boxSize, boxSize, boxSize);
+        ctx.drawImage(treeimg, x * boxSize, y * boxSize, boxSize, boxSize);
       } else if (maze[y][x] === 4) {
-        ctx.drawImage(grassimage, x * boxSize, y * boxSize, boxSize, boxSize);
-        ctx.drawImage(houseimage, x * boxSize, y * boxSize, boxSize, boxSize);
+        ctx.drawImage(grassimg, x * boxSize, y * boxSize, boxSize, boxSize);
+        ctx.drawImage(houseimg, x * boxSize, y * boxSize, boxSize, boxSize);
       } else if (maze[y][x] === 5) {
-        ctx.drawImage(cityimage, x * boxSize, y * boxSize, boxSize, boxSize);
+        ctx.drawImage(cityimg, x * boxSize, y * boxSize, boxSize, boxSize);
       } else if (maze[y][x] === 6) {
-        ctx.drawImage(trophyimage, x * boxSize, y * boxSize, boxSize, boxSize);
+        ctx.drawImage(trophyimg, x * boxSize, y * boxSize, boxSize, boxSize);
       }
     }
   }
@@ -102,7 +102,7 @@ function drawBridge() {
       var y = 3;
     }
   }
-  ctx.drawImage(bridgeimage, x * boxSize, y * boxSize, boxSize, boxSize);
+  ctx.drawImage(bridgeimg, x * boxSize, y * boxSize, boxSize, boxSize);
 }
 
 function drawStartScreen() {
@@ -127,7 +127,7 @@ function drawLevelCompleteScreen() {
 }
 
 function drawCharacter() {
-  ctx.drawImage(characterimage, state.characterX * boxSize, state.characterY * boxSize, boxSize, boxSize);
+  ctx.drawImage(characterimg, state.characterX * boxSize, state.characterY * boxSize, boxSize, boxSize);
 }
 
 function oneStep(direction) {
