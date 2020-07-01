@@ -102,9 +102,11 @@ function drawMaze() {
         ctx.drawImage (waterimage, x*boxSize, y*boxSize, boxSize, boxSize);
       }
       if (maze[y][x] === 3) {
-        ctx.drawImage(treeimage, x*boxSize, y*boxSize, boxSize, boxSize);
+        ctx.drawImage(grassimage, x * boxSize, y * boxSize, boxSize, boxSize);
+        ctx.drawImage(treeimage, x * boxSize, y * boxSize, boxSize, boxSize);
       }
       if (maze[y][x] === 4) {
+        ctx.drawImage(grassimage, x*boxSize, y*boxSize, boxSize, boxSize);
         ctx.drawImage(houseimage, x*boxSize, y*boxSize, boxSize, boxSize);
       }
       if (maze[y][x] === 5) {
