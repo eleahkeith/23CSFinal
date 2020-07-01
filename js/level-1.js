@@ -147,8 +147,6 @@ function masterPath() {
       state.playerY += movePlayerDown;
     }
   }
-  console.log(state.playerX);
-  console.log(state.playerTargetX);
 }
 
 function updateTarget() {
@@ -258,7 +256,6 @@ function drawCompleteScreen() {
   ctx.fillText("Congratulations!", canvas.width/2, canvas.height * .3 );
   ctx.fillText("Level 1 Completed", canvas.width/2, canvas.height * .5 );
   ctx.fillText("Touch To Continue", canvas.width/2, canvas.height * .7);
-  console.log("complete screen");
 }
 
 drawStartScreen();
