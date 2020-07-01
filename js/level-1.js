@@ -135,7 +135,7 @@ function masterPath() {
     var movePlayerRight = state.playerSpeed;
     var distanceFromTargetX = Math.abs(state.playerX - state.playerTargetX);
     var distanceFromTargetY = Math.abs(state.playerY - state.playerTargetY);
-    if (distanceFromTargetX <= 1 && distanceFromTargetY <= 1) {
+    if (distanceFromTargetX <= 1.5 && distanceFromTargetY <= 1.5) {
       getNextQuestion();
     } else if (isMovingLeft) {
       state.playerX += movePlayerLeft;
