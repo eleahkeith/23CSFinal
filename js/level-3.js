@@ -1,12 +1,12 @@
 var theBody = document.querySelector("body");
-theBody.style.background = "lightgreen";
+theBody.style.background = "lightblue";
 
 console.log(`Hmm... Well done, you know how to open the console.
 Surely someone this clever won't try to use it to cheat though, right?`);
 
 // BURGER MENU
-const navItems = document.querySelector("nav ul");
-const burgerIcon = document.querySelector(".burger-icon");
+var navItems = document.querySelector("nav ul");
+var burgerIcon = document.querySelector(".burger-icon");
 
 function toggleBurgerMenu(icon) {
   icon.classList.toggle("transform");
@@ -31,19 +31,19 @@ canvas.width = canvas.offsetWidth;
 canvas.height = canvas.offsetHeight;
 var ctx = canvas.getContext("2d");
 
-const starimage = document.querySelector("#starimage");
-const treeimage = document.querySelector("#treeimage");
-const houseimage = document.querySelector("#houseimage");
-const cityimage = document.querySelector("#cityimage");
-const trophyimage = document.querySelector("#trophyimage");
-const bridgeimage = document.querySelector("#bridgeimage");
-const characterimage = document.querySelector("#characterimage");
-const waterimage = document.querySelector("#waterimage");
-const grassimage = document.querySelector("#grassimage");
+var starimage = document.querySelector("#starimage");
+var treeimage = document.querySelector("#treeimage");
+var houseimage = document.querySelector("#houseimage");
+var cityimage = document.querySelector("#cityimage");
+var trophyimage = document.querySelector("#trophyimage");
+var bridgeimage = document.querySelector("#bridgeimage");
+var characterimage = document.querySelector("#characterimage");
+var waterimage = document.querySelector("#waterimage");
+var grassimage = document.querySelector("#grassimage");
 
 var boxSize = canvas.width/20;
 
-const maze = [
+var maze = [
   [4,3,4,4,4,4,4,4,4,4,4,0,0,5,5,5,2,5,5,5],
   [4,0,4,0,0,0,0,0,0,4,0,4,0,0,0,5,2,5,0,5],
   [4,0,4,0,4,3,4,0,4,4,0,1,0,5,0,5,2,5,0,5],
@@ -142,7 +142,7 @@ function oneStep(direction) {
   }
 }
 
-const paths = {
+var paths = {
   path12: ["up","up","up","right","right"],
   path23a: ["down","down","down","right","right"],
   path23b: ["up","up","left","left","up","up","up","up","up","up"],
@@ -197,11 +197,11 @@ function moveCharacter(i, path) {
 }
 
 // QUIZ
-const questionBox = document.querySelector("#question");
-const answerBoxes = [document.querySelector("#answer1"), document.querySelector("#answer2"),
+var questionBox = document.querySelector("#question");
+var answerBoxes = [document.querySelector("#answer1"), document.querySelector("#answer2"),
   document.querySelector("#answer3"), document.querySelector("#answer4")];
 
-const quiz = {
+var quiz = {
   q1: {q: "function walk(steps, direction) {...};",
         a1: ["function walk(3, 'up'); function walk(2, 'right');", false],
         a2: ["walk() {3, 'up'}; walk() {2, 'right};", false],
