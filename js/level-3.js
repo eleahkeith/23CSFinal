@@ -1,6 +1,3 @@
-var theBody = document.querySelector("body");
-theBody.style.background = "green";
-
 console.log(`Hmm... Well done, you know how to open the console.
 Surely someone this clever won't try to use it to cheat though, right?`);
 
