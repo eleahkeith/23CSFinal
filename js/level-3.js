@@ -1,5 +1,5 @@
 var theBody = document.querySelector("body");
-theBody.style.background = "pink";
+theBody.style.background = "blue";
 
 console.log(`Hmm... Well done, you know how to open the console.
 Surely someone this clever won't try to use it to cheat though, right?`);
@@ -111,8 +111,8 @@ function drawStartScreen() {
   ctx.font = "30px VT323";
   ctx.fillStyle = "#59EA59";
   ctx.textAlign = "center";
-  ctx.fillText("Level 3", canvas.width/2, canvas.height * .4 );
-  ctx.fillText("Touch To Start", canvas.width/2, canvas.height * .6);
+  ctx.fillText("Level 3", canvas.width/2, canvas.height * 0.4 );
+  ctx.fillText("Touch To Start", canvas.width/2, canvas.height * 0.6);
 }
 
 function drawLevelCompleteScreen() {
