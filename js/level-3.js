@@ -1,5 +1,5 @@
 var theBody = document.querySelector("body");
-theBody.style.background = "yellow";
+theBody.style.background = "lightgreen";
 
 console.log(`Hmm... Well done, you know how to open the console.
 Surely someone this clever won't try to use it to cheat though, right?`);
@@ -26,7 +26,7 @@ var state = {
 };
 
 // CANVAS & MAZE
-const canvas = document.querySelector("#screen");
+var canvas = document.querySelector("#screen");
 canvas.width = canvas.offsetWidth;
 canvas.height = canvas.offsetHeight;
 var ctx = canvas.getContext("2d");
@@ -41,7 +41,7 @@ const characterimage = document.querySelector("#characterimage");
 const waterimage = document.querySelector("#waterimage");
 const grassimage = document.querySelector("#grassimage");
 
-const boxSize = canvas.width/20;
+var boxSize = canvas.width/20;
 
 const maze = [
   [4,3,4,4,4,4,4,4,4,4,4,0,0,5,5,5,2,5,5,5],
