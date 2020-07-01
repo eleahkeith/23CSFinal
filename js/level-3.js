@@ -1,5 +1,4 @@
-console.log(`Hmm... Well done, you know how to open the console.
-Surely someone this clever won't try to use it to cheat though, right?`);
+console.log("Hmm... Well done, you know how to open the console. Surely someone this clever won't try to use it to cheat though, right?");
 
 // BURGER MENU
 const navItems = document.querySelector("nav ul");
@@ -10,7 +9,7 @@ function toggleBurgerMenu(icon) {
   navItems.classList.toggle("burger-open");
 }
 
-burgerIcon.addEventListener("click", function(){toggleBurgerMenu(this)});
+burgerIcon.addEventListener("click", function(){toggleBurgerMenu(this);});
 
 // QUIZ - LEVEL 3
 var state = {
@@ -20,7 +19,7 @@ var state = {
   characterX: 1,
   characterY: 14,
   nextQuestionDelay: 0,
-}
+};
 
 // CANVAS & MAZE
 const canvas = document.querySelector("#screen");
@@ -56,7 +55,7 @@ const maze = [
   [4,0,4,0,4,0,4,4,4,1,0,4,1,0,0,3,3,0,0,0],
   [4,0,4,0,4,0,3,0,0,0,3,3,0,4,0,0,0,0,3,0],
   [4,1,4,0,0,1,4,4,4,0,0,0,0,3,3,3,3,0,3,3],
-]
+];
 
 function drawMaze() {
   ctx.fillStyle = "#fff";
@@ -155,7 +154,7 @@ const paths = {
   path910: ["right","right"],
   path10a11: ["right","up","up","right"],
   path10b11: ["right","down","down","right"],
-}
+};
 
 function getPath() {
   var path = "path" + state.questionNumber;
@@ -269,7 +268,7 @@ const quiz = {
         a2: ["var a = 1; var b = 2; var c = 1; runToExit();", false],
         a3: ["runToExit{1, 2, 1};", false],
         a4: ["runToExit(1, 2, 1);", true]},
-}
+};
 
 function quizVisibility(value) {
   if (value === "hidden") {
@@ -333,7 +332,7 @@ function handleCanvasClick(e) {
   if (state.quizMode === "startScreen") {
     startQuiz();
   } else if (state.quizMode === "completed") {
-    window.location.assign("../game-complete.html")
+    window.location.assign("../game-complete.html");
   }
 }
 
@@ -372,6 +371,6 @@ function handleAnswerClick(e) {
 
 canvas.addEventListener("click", handleCanvasClick);
 for (var i = 0; i < 4; i++) {
-  answerBoxes[i].addEventListener("click", handleAnswerClick)
+  answerBoxes[i].addEventListener("click", handleAnswerClick);
 }
 setTimeout(drawStartScreen, 10);
