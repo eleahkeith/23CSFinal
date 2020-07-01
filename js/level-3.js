@@ -1,5 +1,5 @@
 var theBody = document.querySelector("body");
-theBody.style.background = "blue";
+theBody.style.background = "green";
 
 console.log(`Hmm... Well done, you know how to open the console.
 Surely someone this clever won't try to use it to cheat though, right?`);
@@ -377,4 +377,4 @@ canvas.addEventListener("click", handleCanvasClick);
 for (var i = 0; i < 4; i++) {
   answerBoxes[i].addEventListener("click", handleAnswerClick);
 }
-setTimeout(drawStartScreen, 10);
+setTimeout(drawStartScreen, 15);
