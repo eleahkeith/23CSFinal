@@ -29,7 +29,7 @@ var state = {
 const canvas = document.querySelector("#screen");
 canvas.width = canvas.offsetWidth;
 canvas.height = canvas.offsetHeight;
-const ctx = canvas.getContext("2d");
+var ctx = canvas.getContext("2d");
 
 const starimage = document.querySelector("#starimage");
 const treeimage = document.querySelector("#treeimage");
