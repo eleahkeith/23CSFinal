@@ -1,5 +1,5 @@
 var theBody = document.querySelector("body");
-theBody.style.background = "lightblue";
+theBody.style.background = "lightgreen";
 
 console.log(`Hmm... Well done, you know how to open the console.
 Surely someone this clever won't try to use it to cheat though, right?`);
@@ -31,7 +31,7 @@ canvas.width = canvas.offsetWidth;
 canvas.height = canvas.offsetHeight;
 const ctx = canvas.getContext("2d");
 
-var starimage = document.querySelector("#starimage");
+const starimg = document.querySelector("#starimage");
 var treeimage = document.querySelector("#treeimage");
 var houseimage = document.querySelector("#houseimage");
 var cityimage = document.querySelector("#cityimage");
@@ -74,7 +74,7 @@ function drawMaze() {
         ctx.strokeRect(x * boxSize, y * boxSize, boxSize, boxSize);
       }
       if (maze[y][x] === 1) {
-        ctx.drawImage(starimage, x * boxSize, y * boxSize, boxSize, boxSize);
+        ctx.drawImage(starimg, x * boxSize, y * boxSize, boxSize, boxSize);
       } else if (maze[y][x] === 2) {
         ctx.drawImage(waterimage, x * boxSize, y * boxSize, boxSize, boxSize);
       } else if (maze[y][x] === 3) {
