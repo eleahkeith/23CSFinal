@@ -125,9 +125,9 @@ function drawPlayer() {
 
 function masterPath() {
   if (state.questionMode === false) {
-    var isMovingLeft = state.playerX > state.playerTargetX;
+    var isMovingLeft = Math.floor(state.playerX) > Math.floor(state.playerTargetX);
     var isMovingUp = state.playerY > state.playerTargetY;
-    var isMovingRight = state.playerX < state.playerTargetX;
+    var isMovingRight = Math.floor(state.playerX) < Math.floor(state.playerTargetX);
     var isMovingDown = state.playerY < state.playerTargetY;
     var movePlayerUp = state.playerSpeed * -1;
     var movePlayerLeft = state.playerSpeed * -1;
