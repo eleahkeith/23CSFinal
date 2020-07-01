@@ -147,6 +147,7 @@ function masterPath() {
       state.playerY += movePlayerDown;
     }
   }
+  console.log(state.playerX);
 }
 
 function updateTarget() {
